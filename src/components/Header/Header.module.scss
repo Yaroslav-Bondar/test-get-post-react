@@ -1,0 +1,22 @@
+@import '../../styles/_mixins/alignment';
+@import '../../styles/_config/variables';
+
+.header {
+    background-color: $color-white;
+    &__container {
+        @include flex-center-v;
+        justify-content: space-between;
+        height: 60px;
+    }
+    &__links {
+        display: flex;
+    }
+    &__link {
+        width: 100px;
+        height: 34px;
+        border-radius: 80px;
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

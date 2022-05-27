@@ -1,0 +1,14 @@
+// layout restrictions
+@mixin wrapper {
+    max-width: $wrapper-max;
+    min-width: $wrapper-min;
+    min-height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+// container
+@mixin container {
+    max-width: $container-max-width;
+    padding: 0 $container-padding;
+    margin: 0 auto;
+}

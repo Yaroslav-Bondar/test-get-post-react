@@ -1,0 +1,40 @@
+// @import-normalize;
+// utils
+@use "sass:map";
+@import '_config/normalize';
+// mixins
+@import '_mixins/media';
+@import '_mixins/container';
+@import '_mixins/alignment';
+@import '_mixins/font-face';
+// @import 'common/chunks';
+// settings
+@import "_config/variables";
+@import '_config/fonts';
+
+
+// blocks
+@import 'blocks/logo';
+@import 'blocks/link';
+@import 'blocks/img';
+@import 'blocks/title';
+@import 'blocks/users';
+@import 'blocks/btn';
+
+html, body {
+    font-family: $font-family-base;
+    @include font-nunito-regular;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+._container {
+    @include container;
+}
+._wrapper {
+    @include wrapper;
+    background-color: $color-background;
+    color: $font-color-base;
+}

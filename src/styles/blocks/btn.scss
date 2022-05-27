@@ -1,0 +1,7 @@
+.btn {
+    @include flex-center;
+    border: none;
+    &_color_yellow {
+        background-color: $color-primary;
+    }  
+} 

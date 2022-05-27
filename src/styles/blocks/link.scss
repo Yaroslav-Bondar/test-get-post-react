@@ -1,0 +1,11 @@
+// @use '../_config/variables.scss';
+
+.link {
+    @include flex-center;
+    text-decoration: none;
+    // color: $color-black;
+    color: $font-color-base;
+    &_color_yellow {
+        background-color: $color-primary;
+    }
+}

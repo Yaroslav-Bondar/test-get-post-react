@@ -12,7 +12,7 @@
 /build
 
 #tmp
-/tmp
+/src/tmp
 
 # misc
 .DS_Store

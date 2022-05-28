@@ -4,14 +4,17 @@
  * @param {String} url - url for request
  * @returns {Promise} - Promise with query result
  */
-export const getApiResource = async (url, options) => {
+//  , options
+export const getApiResource = async (url) => {
     
-    const response = await fetch(url, options);
+    const response = await fetch(url);
     // if(!response.success) {
     //     console.log(response);
     //     return 
     // }
     console.log(response);
-    return await response.json();
+    const data = await response.json();
+    // console.log(data);
+    return data;
 
 } 

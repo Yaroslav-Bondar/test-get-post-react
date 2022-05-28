@@ -1,36 +1,45 @@
 import PropTypes from 'prop-types';
 import styles from './Card.module.scss';
 
-const Card = () => {
+const Card = ({users}) => {
     return (
-        <div className={styles.card}>
-            <div className={styles.card__item}>
-                <div className={styles.card__avatar}>
-                    <img 
-                        className={styles.card__img + ` img`} 
-                        src='/img/avatar/01.svg' 
-                        alt='User Avatar'
-                    />
-                </div>
-                <div className={styles.card__name}>
-                    Salvador Stewart Flynn Thomas Salva Salve...                                        </div>
-                <div className={styles.card__about}>
-                    <p className={styles.card__position}>
-                        Leading specialist of the department of cent...                                             </p>
-                    <p className={styles.card__email}>
-                        frontend_develop@gmail.com
-                    </p>
-                    <p className={styles.card__phone}>
-                        +38 (098) 278 44 24
-                    </p>
-                </div>
-            </div>
-        </div>
+        <ul className={styles.card__list}>
+            {users.map(({id,photo,name,position,email,phone}) => 
+                <li className={styles.card__item} key={id}>
+                    <div className={styles.card__avatar}>
+                        <img 
+                            className={styles.card__img + ` img`} 
+                            src={photo} 
+                            alt='User Avatar'
+                        />
+                    </div>
+                    <div className={styles.card__name}>
+                        {name}                                        
+                    </div>
+                    <div className={styles.card__about}>
+                        <p className={styles.card__position}>
+                            {position}                                             
+                        </p>
+                        <a className={styles.card__email} 
+                            href={`mailto:${email}`}
+                        >
+                            {email}
+                            <span className={styles.card__email_tip}>
+                                {email}
+                            </span>
+                        </a>
+                        <p className={styles.card__phone}>
+                            {phone}
+                        </p>
+                    </div>
+                </li>
+            )}
+        </ul>
     );
 }
 
-// styles.card.propTypes = {
-//     text: PropTypes.
-// }
+Card.propTypes = {
+    users: PropTypes.array,
+}
 
 export default Card;

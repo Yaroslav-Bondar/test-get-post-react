@@ -16,7 +16,7 @@ $breakpoints: (
 ) !default;
 
 // font
-$font-family-base: 'Nunito Regular';
+$font-family-base: 'Nunito';
 $font-weight-base: 400;
 $font-size-base: 16px;
 $line-height-base: 26px;
@@ -31,7 +31,9 @@ $color-black: #000;
 $color-dark: rgba(0, 0, 0, 0.87);
 $color-primary: #F4E041;
 $color-background: #E5E5E5;
-
+$color-alto: #D0CFCF;
+$color-gray: #7E7E7E;
+$color-mahogany: #CB3D40;
 
 $color-mercury: #E5E5E5;
 $color-boston-blue: #3A91BF;

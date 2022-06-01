@@ -3,6 +3,7 @@
 import Header from '../../components/Header';
 import Banner from '../../components/Banner';
 import Get from '../Get';
+import Post from '../Post';
 // import '../../styles/main.scss';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <main>
         <Banner/>
         <Get/>
+        <Post/>
       </main>
     </div>
   );

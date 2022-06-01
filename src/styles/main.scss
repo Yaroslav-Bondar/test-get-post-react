@@ -1,16 +1,17 @@
-// @import-normalize;
 // utils
 @use "sass:map";
 @import '_config/normalize';
-// mixins
+
+// config mixins
 @import '_mixins/media';
 @import '_mixins/container';
 @import '_mixins/alignment';
 @import '_mixins/font-face';
-// @import 'common/chunks';
+
 // settings
 @import "_config/variables";
-@import '_config/fonts';
+@import '_config/connect-fonts';
+@import '_config/include-fonts';
 
 
 // blocks

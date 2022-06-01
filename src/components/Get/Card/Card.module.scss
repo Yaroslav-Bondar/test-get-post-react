@@ -32,26 +32,27 @@
     &__position {
 
     }
-    &__email {
+    &__email,
+    &__phone {
+        display: block;
         position: relative;
         text-decoration: none;
         color: $font-color-base;
-        border: 2px solid rosybrown;
-        &_tip {
-            display: none;
-        }
     }
-    &__email:hover .card__email_tip {
+    &__phonetip,
+    &__emailtip {
+        display: none;
+    }
+    &__phone:hover .card__phonetip,
+    &__email:hover .card__emailtip {
         display: block;
         position: absolute;
         left: 36%;
         top: 47px;
+        transform: translateX(30%);
         padding: 3px 16px;
         border-radius: 4px;
         color: $color-white;
         background-color: $color-dark;
-    }
-    &__phone {
-
     }
 }

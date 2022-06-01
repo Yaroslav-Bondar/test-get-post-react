@@ -24,13 +24,18 @@ const Card = ({users}) => {
                             href={`mailto:${email}`}
                         >
                             {email}
-                            <span className={styles.card__email_tip}>
+                            <span className={styles.card__emailtip}>
                                 {email}
                             </span>
                         </a>
-                        <p className={styles.card__phone}>
+                        <a className={styles.card__phone}
+                            href={`tel:${phone}`} 
+                        >
                             {phone}
-                        </p>
+                            <span className={styles.card__phonetip}>
+                                {phone}
+                            </span>
+                        </a>
                     </div>
                 </li>
             )}

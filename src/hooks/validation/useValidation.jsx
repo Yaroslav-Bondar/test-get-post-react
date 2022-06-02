@@ -1,16 +1,15 @@
 import {useState, useEffect} from 'react';
 
 const useValidation = (value, validations) => {
-    const [isEmpty, setEmpty] = useState(true);
-    // const [isEmptyMessage, setEmptyMessage] = useState('');
+    // errors state
+    const [isEmptyError, setIsEmptyError] = useState(true);
     const [minLengthError, setMinLengthError] = useState(false);
-    // const [minLengthMassage, setMinLengthMessage] = useState('');
     const [maxLengthError, setMaxLengthError] = useState(false);
-    const [emailError, setEmailError] = useState(false);
+    const [patternError, setPatternError] = useState(false);
+    // const [emailError, setEmailError] = useState(false);
     const [inputErrors, setInputErrors] = useState({});
     const [inputValid, setInputValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
-    // const [valid]
 
     useEffect(() => {
         const errors = {};
@@ -29,11 +28,11 @@ const useValidation = (value, validations) => {
 
                 case 'isEmpty':
                     if(value) {
-                        setEmpty(false);
-                        errors.isEmpty = false;
+                        setIsEmptyError(false);
+                        errors.isEmptyError = false;
                     } else {
-                        errors.isEmpty = true;
-                        setEmpty(true);
+                        errors.isEmptyError = true;
+                        setIsEmptyError(true);
                     }
                     break;
 
@@ -46,14 +45,15 @@ const useValidation = (value, validations) => {
                         setMaxLengthError(false);
                     }
                     break;
-                
-                case 'isEmail':
-                    // const re = //;
-                    // if(re.test(value.toLowerCase())) {
-                    //     setEmailError(false);
-                    // } else {
-                    //     setEmailError(true);
-                    // }
+
+                case 'pattern':
+                    if(validations[validation].test(value.toLowerCase())) {
+                        setPatternError(false);
+                        errors.patternError = false;
+                    } else {
+                        setPatternError(true);
+                        errors.patternError = true;
+                    }
                     break;
             }
         }
@@ -66,6 +66,7 @@ const useValidation = (value, validations) => {
         const errors = Object.values(inputErrors);
         if(!errors.includes(true)) {
             setInputValid(true);
+           
         } else {
             setInputValid(false);
         }
@@ -73,12 +74,12 @@ const useValidation = (value, validations) => {
 
     // form validation
     useEffect(() => {
-        if(isEmpty || minLengthError || maxLengthError || emailError) {
+        if(isEmptyError || minLengthError || maxLengthError || patternError) {
             setFormValid(false);
         } else {
             setFormValid(true);
         }
-    }, [isEmpty, minLengthError, maxLengthError, emailError]);
+    }, [isEmptyError, minLengthError, maxLengthError, patternError]);
     
     return {
         // isEmpty,

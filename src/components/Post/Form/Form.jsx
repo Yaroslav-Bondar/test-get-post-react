@@ -1,12 +1,17 @@
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import InputHelper from '../InputHelper';
+import Position from '../Position';
 import {useInput} from '../../../hooks/validation/useInput';
 import {VALID_MESSAGES} from '../../../constants/validation';
 import {RFC2822_EMAIL_VALIDATION} from '../../../constants/validation';
 import {PHONE_VALIDATION} from '../../../constants/validation';
+import {getApiResource} from '../../../utils/network';
+import {API_POSITIONS_PATH} from '../../../constants/api';
 import styles from './Form.module.scss';
 
 const Form = () => {
+    const [positions, setPositions] = useState(null);
     const name = useInput('', 'name', 
                                 {
                                     isEmpty: false, 
@@ -24,10 +29,19 @@ const Form = () => {
                         );
     const phone = useInput('', 'phone', 
                                 {
-                                    isEmpty: 'bool', 
+                                    isEmpty: false, 
                                     pattern: PHONE_VALIDATION,
                                 }
                             );
+    // const 
+    useEffect(() => {
+        (async () => {
+            const data = await getApiResource(API_POSITIONS_PATH);
+            console.log('positions', data);
+            setPositions(data.positions);
+        })();
+    }, []);
+
     return (
         <div className="form">
             <form className="form__container">
@@ -43,8 +57,6 @@ const Form = () => {
                             aria-label="user name"
                             name="name"
                             placeholder="Your name"
-                            // minLength="2" 
-                            // maxLength="60"
                             required
                             value={name.values.value}
                             onChange={(e) => name.handlers.onChange(e)}
@@ -53,7 +65,6 @@ const Form = () => {
                         />
                     </div>
                     <div className="form__input">   
-                        {/* {(email.isDirty && email.isEmpty) && <div style={{color: 'red'}}> field can not be empty </div>} */}
                         <InputHelper 
                             helper = {email}
                             messages = {VALID_MESSAGES} 
@@ -64,15 +75,11 @@ const Form = () => {
                             aria-label="email"
                             name="email"
                             placeholder="Email"
-                            // minLength="2"
-                            // maxLength="100"
-                            // pattern={EMAIL_RFC2822}
                             required
                             value={email.values.value}
                             onChange={(e) => email.handlers.onChange(e)}
                             onBlur={(e) => email.handlers.onBlur(e)}
                             onFocus={(e) => email.handlers.onFocus(e)}
-                            // pattern={^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$)} 
                         />
                     </div>
                     <div className="form__input">   
@@ -86,14 +93,33 @@ const Form = () => {
                             aria-label="phone number"
                             name="phone"
                             placeholder="Phone"
-                            // minLength="2"
-                            // maxLength="100"
-                            // pattern={PHONE_VALIDATION}
                             required
                             value={phone.values.value}
                             onChange={(e) => phone.handlers.onChange(e)}
                             onBlur={(e) => phone.handlers.onBlur(e)}
                             onFocus={(e) => phone.handlers.onFocus(e)}
+                        />
+                    </div>
+                </div>
+                <div className="form__positions">
+                    <div className="form__positions-title">
+                        Select your position
+                    </div>
+                    <div className="form__position">
+                        {positions && <Position positions={positions}/>}
+                    </div>
+                </div>
+                <div className="form__file">
+                    {/* <InputHelper 
+                        helper = {name}
+                        messages = {VALID_MESSAGES} 
+                    /> */}
+                    <div className="form__input">
+                        <input 
+                            className="form__photo"
+                            type="file"
+                            name="photo"
+                            accept=".jpg, .jpeg" 
                         />
                     </div>
                 </div>

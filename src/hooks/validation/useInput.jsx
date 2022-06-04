@@ -7,7 +7,8 @@ const useInput = (initialValue, id, validations) => {
     const [isDirty, setDirty] = useState(false);
     const [isFocus, setIsFocus] = useState(false);
     const [fileValue, setFileValue] = useState(initialValue);
-    const valid = useValidation(value, validations);
+    // input validation
+    const valid = useValidation(value, fileValue, validations);
     console.log('valid', valid); 
     const onChange = (e) => {
         setValue(e.target.value);
@@ -29,6 +30,7 @@ const useInput = (initialValue, id, validations) => {
         id: id,
         handlers: {
             onChange,
+            onChangeFile,
             onBlur,
             onFocus,
         },

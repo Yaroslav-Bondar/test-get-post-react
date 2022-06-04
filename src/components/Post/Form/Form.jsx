@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import InputHelper from '../InputHelper';
 import Position from '../Position';
 import {useInput} from '../../../hooks/validation/useInput';
+import {getApiResource} from '../../../utils/network';
 import {VALID_MESSAGES} from '../../../constants/validation';
 import {RFC2822_EMAIL_VALIDATION} from '../../../constants/validation';
 import {PHONE_VALIDATION} from '../../../constants/validation';
-import {getApiResource} from '../../../utils/network';
 import {API_POSITIONS_PATH} from '../../../constants/api';
 import styles from './Form.module.scss';
 
@@ -33,11 +33,16 @@ const Form = () => {
                                     pattern: PHONE_VALIDATION,
                                 }
                             );
-    // const 
+    const file = useInput('', 'file',
+                                {
+                                    imageDimensions: {height: 70, width: 70, check: 'min'},
+                                    fileType: ['image/jpg', 'image/jpeg'],
+                                }
+    ); 
     useEffect(() => {
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
-            console.log('positions', data);
+            // console.log('positions', data);
             setPositions(data.positions);
         })();
     }, []);
@@ -120,6 +125,7 @@ const Form = () => {
                             type="file"
                             name="photo"
                             accept=".jpg, .jpeg" 
+                            onChange={(e) => file.handlers.onChangeFile(e)}
                         />
                     </div>
                 </div>

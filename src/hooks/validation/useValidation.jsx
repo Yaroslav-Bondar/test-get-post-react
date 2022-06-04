@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react';
+import {checkImageDimensions} from '../../services/validation/checkImageDimensions';
 
-const useValidation = (value, validations) => {
+const useValidation = (value, fileValue, validations) => {
     // errors state
     const [isEmptyError, setIsEmptyError] = useState(true);
     const [minLengthError, setMinLengthError] = useState(false);
     const [maxLengthError, setMaxLengthError] = useState(false);
     const [patternError, setPatternError] = useState(false);
-    // const [emailError, setEmailError] = useState(false);
+    const [imageDimensionsError, setImageDimensionsError] = useState(false);
     const [inputErrors, setInputErrors] = useState({});
     const [inputValid, setInputValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
@@ -55,11 +56,22 @@ const useValidation = (value, validations) => {
                         errors.patternError = true;
                     }
                     break;
+                case 'imageDimensions':
+                    (async () => {
+                        const isImageDimensions = await checkImageDimensions(validations, fileValue);
+                        if(isImageDimensions) {
+                            setImageDimensionsError(true);
+                            errors.imageDimensionsError = true;
+                        } else {
+                            setImageDimensionsError(false);
+                            errors.imageDimensionsError = false;
+                        }
+                    })();
+                    break;    
             }
         }
-        // console.log('errors', errors);
         setInputErrors(errors);
-    }, [value]);
+    }, [value, fileValue]);
 
     // input validation
     useEffect(() => {
@@ -74,18 +86,14 @@ const useValidation = (value, validations) => {
 
     // form validation
     useEffect(() => {
-        if(isEmptyError || minLengthError || maxLengthError || patternError) {
+        if(isEmptyError || minLengthError || maxLengthError || patternError || imageDimensionsError) {
             setFormValid(false);
         } else {
             setFormValid(true);
         }
-    }, [isEmptyError, minLengthError, maxLengthError, patternError]);
+    }, [isEmptyError, minLengthError, maxLengthError, patternError, imageDimensionsError]);
     
     return {
-        // isEmpty,
-        // minLengthError,
-        // maxLengthError,
-        // emailError,
         errors: {...inputErrors},
         state: {    inputValid,
                     formValid,

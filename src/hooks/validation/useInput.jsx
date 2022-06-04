@@ -7,15 +7,20 @@ const useInput = (initialValue, id, validations) => {
     const [isDirty, setDirty] = useState(false);
     const [isFocus, setIsFocus] = useState(false);
     const [fileValue, setFileValue] = useState(initialValue);
+    const [fileName, setFileName] = useState('');
     // input validation
     const valid = useValidation(value, fileValue, validations);
     console.log('valid', valid); 
+    
+    //handlers
     const onChange = (e) => {
         setValue(e.target.value);
     }
-
+    
     const onChangeFile = (e) => {
-        setFileValue(e.target.files[0]);
+        const file = e.target.files[0]; 
+        setFileValue(file);
+        setFileName(file.name);
     }
     
     const onBlur = (e) => {
@@ -36,6 +41,7 @@ const useInput = (initialValue, id, validations) => {
         },
         values: {
             value,
+            fileName,
         },
         state: {
             isDirty,

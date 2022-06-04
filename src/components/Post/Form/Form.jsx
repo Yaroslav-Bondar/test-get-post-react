@@ -33,16 +33,17 @@ const Form = () => {
                                     pattern: PHONE_VALIDATION,
                                 }
                             );
-    const file = useInput('', 'file',
+    const file = useInput(null, 'file',
                                 {
                                     imageDimensions: {height: 70, width: 70, check: 'min'},
                                     fileType: ['image/jpg', 'image/jpeg'],
+                                    fileSize: 1048576 //5242880, value in bytes
                                 }
-    ); 
+    );
+    console.log('file obj', file); 
     useEffect(() => {
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
-            // console.log('positions', data);
             setPositions(data.positions);
         })();
     }, []);

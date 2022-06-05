@@ -14,7 +14,7 @@ const useValidation = (value, fileValue, validations) => {
     // group errors
     const [inputErrors, setInputErrors] = useState({});
     const [inputValid, setInputValid] = useState(false);
-    const [formValid, setFormValid] = useState(false);
+    // const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
         const errors = {};
@@ -123,19 +123,19 @@ const useValidation = (value, fileValue, validations) => {
         })();
     }, [value, fileValue]);
 
-    // form validation
-    useEffect(() => {
-        if(isEmptyError || minLengthError || maxLengthError || patternError || imageDimensionsError || fileTypeError || fileSizeError || isFileEmptyError) {
-            setFormValid(false);
-        } else {
-            setFormValid(true);
-        }
-    }, [isEmptyError, minLengthError, maxLengthError, patternError, imageDimensionsError, fileTypeError, fileSizeError, isFileEmptyError]);
+    // // form validation
+    // useEffect(() => {
+    //     if(isEmptyError || minLengthError || maxLengthError || patternError || imageDimensionsError || fileTypeError || fileSizeError || isFileEmptyError) {
+    //         setFormValid(false);
+    //     } else {
+    //         setFormValid(true);
+    //     }
+    // }, [isEmptyError, minLengthError, maxLengthError, patternError, imageDimensionsError, fileTypeError, fileSizeError, isFileEmptyError]);
     
     return {
         errors: {...inputErrors},
         state: {    inputValid,
-                    formValid,
+                    // formValid,
                 },
     }
 }

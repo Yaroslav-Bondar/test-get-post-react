@@ -29,15 +29,18 @@ const InputHelper = ({helper, messages}) => {
     }
     useEffect(() => {
         if(helper.id === 'file') {
+            // rendering condition
             const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
-            // set error message
+            // set error state
             setIsError(error);
+            // set error message
             errorMessageTuner();
         } else {
             // rendering condition
             const error = !helper.errors.isEmptyError && !helper.state.inputValid; 
             const tip = helper.state.isFocus && helper.errors.isEmptyError || !helper.errors.isEmptyError && helper.state.inputValid;
             const label = !helper.errors.isEmptyError;
+            // set states
             setIsError(error);
             setIsTip(tip);
             setIsLabel(label);

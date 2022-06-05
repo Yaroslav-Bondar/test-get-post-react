@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import InputHelper from '../InputHelper';
 import Position from '../Position';
 import {useInput} from '../../../hooks/validation/useInput';
+import Button from '../../UI/Button';
 import {getApiResource} from '../../../utils/network';
 import {VALID_MESSAGES} from '../../../constants/validation';
 import {RFC2822_EMAIL_VALIDATION} from '../../../constants/validation';
@@ -12,12 +13,15 @@ import styles from './Form.module.scss';
 
 const Form = () => {
     const [positions, setPositions] = useState(null);
+    const [isFormValid, setIsFormValid] = useState(false);
+
     const name = useInput('', 'name', 
                                 {
                                     isEmpty: false, 
                                     minLength: 2, 
                                     maxLength: 60
-                                }
+                                },
+                                setIsFormValid
                         );
     const email = useInput('', 'email', 
                             {
@@ -25,23 +29,36 @@ const Form = () => {
                                 minLength: 10, 
                                 maxLength: 100,
                                 pattern: RFC2822_EMAIL_VALIDATION,
-                            }
+                            },
+                            setIsFormValid
                         );
     const phone = useInput('', 'phone', 
                                 {
                                     isEmpty: false, 
                                     pattern: PHONE_VALIDATION,
-                                }
+                                },
+                                setIsFormValid
                             );
     const file = useInput(null, 'file',
                                 {
                                     isFileEmpty: false,
-                                    imageDimensions: {height: 70, width: 70, check: 'min'},
+                                    imageDimensions: {height: 70, width: 70, check: 'min'}, // value in pixels
                                     fileType: ['image/jpg', 'image/jpeg'],
-                                    fileSize: 1048576 //5242880, value in bytes
-                                }
+                                    fileSize: 5242880 // 1048576, value in bytes
+                                },
+                                setIsFormValid
     );
-    console.log('file obj', file); 
+    console.log('file obj', file);
+    console.log('isFormValid', isFormValid);
+    useEffect(() => {
+        const formValid = [name.state.inputValid,email.state.inputValid,
+                            phone.state.inputValid,file.state.inputValid]
+        if(formValid.includes(false)) {
+            setIsFormValid(false);
+        } else {
+            setIsFormValid(true);
+        }
+    },[name.state.inputValid,email.state.inputValid,phone.state.inputValid,file.state.inputValid]);  
     useEffect(() => {
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
@@ -67,7 +84,7 @@ const Form = () => {
                             required
                             value={name.values.value}
                             onChange={(e) => name.handlers.onChange(e)}
-                            onBlur={(e) => name.handlers.onBlur(e)}
+                            // onBlur={(e) => name.handlers.onBlur(e)}
                             onFocus={(e) => name.handlers.onFocus(e)}
                         />
                     </div>
@@ -85,7 +102,7 @@ const Form = () => {
                             required
                             value={email.values.value}
                             onChange={(e) => email.handlers.onChange(e)}
-                            onBlur={(e) => email.handlers.onBlur(e)}
+                            // onBlur={(e) => email.handlers.onBlur(e)}
                             onFocus={(e) => email.handlers.onFocus(e)}
                         />
                     </div>
@@ -103,7 +120,7 @@ const Form = () => {
                             required
                             value={phone.values.value}
                             onChange={(e) => phone.handlers.onChange(e)}
-                            onBlur={(e) => phone.handlers.onBlur(e)}
+                            // onBlur={(e) => phone.handlers.onBlur(e)}
                             onFocus={(e) => phone.handlers.onFocus(e)}
                         />
                     </div>
@@ -133,10 +150,7 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="form__btn">
-                    <button 
-                        // disabled={!name.formValid || !email.formValid} 
-                        type="submit">Submit
-                    </button>
+                    <Button isDisabled={isFormValid}/>
                 </div>
             </form>
         </div>

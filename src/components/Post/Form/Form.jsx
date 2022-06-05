@@ -117,16 +117,17 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="form__file">
-                    {/* <InputHelper 
-                        helper = {name}
-                        messages = {VALID_MESSAGES} 
-                    /> */}
                     <div className="form__input">
+                        <InputHelper 
+                            helper = {file}
+                            messages = {VALID_MESSAGES} 
+                        />
                         <input 
                             className="form__photo"
                             type="file"
                             name="photo"
                             accept=".jpg, .jpeg" 
+                            required
                             onChange={(e) => file.handlers.onChangeFile(e)}
                         />
                     </div>

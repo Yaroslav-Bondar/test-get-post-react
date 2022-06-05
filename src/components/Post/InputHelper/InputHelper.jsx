@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './InputHelper.module.scss';
 
 /**
- * 
+ * sets hints and errors when entering data
+ * @param {object} helper - user input hint and error state object
+ * @param {object} messages - a set of messages to correct user input
+ * @returns {jsx} jsx - jsx for rendering messages 
  */
 const InputHelper = ({helper, messages}) => {
-    // console.log('validMessages', validMessages);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,29 +18,36 @@ const InputHelper = ({helper, messages}) => {
     const [isLabel, setIsLabel] = useState(false);
     const [labelMessage, setLabelMessage] = useState('');
     
-    // console.log('isEmptyError', helper.errors.isEmptyError);
-    // console.log('helper', helper);
-    // console.log('tipMessage', tipMessage);
-
-    useEffect(() => {
-        // rendering condition
-        const error = !helper.errors.isEmptyError && !helper.state.inputValid; 
-        const tip = helper.state.isFocus && helper.errors.isEmptyError || !helper.errors.isEmptyError && helper.state.inputValid;
-        const label = helper.errors.isEmptyError;
-        setIsError(error);
-        setIsTip(tip);
-        setIsLabel(label);
-        // set Error message
-        for(const error in helper.errors) {
+    // set error message from messages object
+    function errorMessageTuner() {
+        for(const error in helper.errors) { // * to function
             if(helper.errors[error]) {
                 setErrorMessage(messages.errors[error]);
+                break;
             }
+        } 
+    }
+    useEffect(() => {
+        if(helper.id === 'file') {
+            const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
+            // set error message
+            setIsError(error);
+            errorMessageTuner();
+        } else {
+            // rendering condition
+            const error = !helper.errors.isEmptyError && !helper.state.inputValid; 
+            const tip = helper.state.isFocus && helper.errors.isEmptyError || !helper.errors.isEmptyError && helper.state.inputValid;
+            const label = !helper.errors.isEmptyError;
+            setIsError(error);
+            setIsTip(tip);
+            setIsLabel(label);
+            // set Error message
+            errorMessageTuner();
+            // set Tip message
+            setTipMessage(messages[helper.id].helper);
+            // set Label message
+            setLabelMessage(messages[helper.id].label);
         }
-        // set Tip message
-        setTipMessage(messages[helper.id].helper);
-        // set Label message
-        setLabelMessage(messages[helper.id].label);
-
     });
     return (
         <>
@@ -50,19 +59,17 @@ const InputHelper = ({helper, messages}) => {
                 <div style={{color: 'blue'}}>
                     {tipMessage}
                 </div>} 
-            {!isLabel &&  
+            {isLabel &&  
                 <div style={{color: 'blue'}}> 
                     {labelMessage}
                 </div>}
         </>
     );
-
-
 }
 
 InputHelper.propTypes = {
     helper: PropTypes.object,
-    id: PropTypes.string,
+    messages: PropTypes.object,
 }
 
 export default InputHelper;

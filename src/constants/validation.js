@@ -15,13 +15,16 @@ const HELPER_MESSAGES = {
         label: 'phone number',
     }
 }
-
+// a set of messages to correct user input
 export const VALID_MESSAGES = {
     errors : {
         minLengthError: 'too few characters entered',
         maxLengthError: 'too many characters', 
         isEmptyError: 'field can not be empty',
-        patternError: 'input doesn`t match validation pattern'
+        patternError: 'input doesn`t match validation pattern',
+        imageDimensionsError: 'must be at least 70x70px',
+        fileTypeError: 'should be jpg/jpeg image',
+        fileSizeError: 'size must not exceed 5MB',
     },
     ...HELPER_MESSAGES,
 }

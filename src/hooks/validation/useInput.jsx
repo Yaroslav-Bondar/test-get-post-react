@@ -40,7 +40,7 @@ const useInput = (initialValue, id, validations) => {
             onFocus,
         },
         values: {
-            value,
+            // value, //* is it necessary ?
             fileName,
         },
         state: {

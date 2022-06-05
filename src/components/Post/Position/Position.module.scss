@@ -1,0 +1,47 @@
+@import '../../../styles/_config/variables';
+@import '../../../styles/_mixins/alignment';
+
+.position {
+    &__title {
+        margin-bottom: 11px;
+    }
+    &__list {
+        list-style-type: none;
+    }
+    &__item {
+        @include flex-center-v;
+
+    }
+    &__radio {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        position: relative;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        border: 1px solid $color-alto;
+        outline: none;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: $color-robin;
+            opacity: 0;
+            transition: .2s opacity;
+        }
+        &:checked::before {
+            opacity: 1;
+        }
+    }
+    &__radio,
+    &__job {
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,13 @@
+@import '../../../styles/_config/variables';
+
+.form {
+    &__wrap {
+
+    }
+    &__input {
+        height: 54px;
+        background-color: $color-alabaster;
+        border: 1px solid $color-alto;
+        border-radius: 4px;
+    }
+}

@@ -8,7 +8,7 @@ const More = ({nextPage, getResource}) => {
     };
     return (
         <button 
-            className={styles.more__btn + ` btn btn_color_yellow`}
+            className={styles.more__btn + ` hover-btn btn btn_color_yellow`}
             onClick={handleChangeMore}
         >
             Show more     

@@ -70,13 +70,14 @@ const Form = () => {
         <div className="form">
             <form className="form__container">
                 <div className="form__inputs">
-                    <div className="form__input">
+                    <div className={styles.form__wrap}>
                         <InputHelper 
                             helper = {name}
                             messages = {VALID_MESSAGES} 
                         />
                         <input
                             id="name" 
+                            className={styles.form__input}
                             type="text" 
                             aria-label="user name"
                             name="name"
@@ -126,12 +127,10 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="form__positions">
-                    <div className="form__positions-title">
-                        Select your position
-                    </div>
-                    <div className="form__position">
+            
+                    {/* <div className="form__position"> */}
                         {positions && <Position positions={positions}/>}
-                    </div>
+                    {/* </div> */}
                 </div>
                 <div className="form__file">
                     <div className="form__input">

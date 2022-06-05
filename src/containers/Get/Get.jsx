@@ -35,7 +35,7 @@ const Get = () => {
     return (
         <>
             <section className={styles.get}>
-                <div className={styles.get__container +` _container`}>
+                <div id='get' className={styles.get__container +` _container`}>
                     <h2 className={styles.get__title +` title`}>
                         Working with GET request
                     </h2>

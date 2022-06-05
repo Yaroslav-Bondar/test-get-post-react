@@ -7,7 +7,7 @@ import styles from './Post.module.scss';
 const Post = () => {
     return (
         <section className={styles.post}>
-            <div className="post__container _container">
+            <div id='post' className="post__container _container">
                 <h2 className="post__title title">
                     Working with GET request
                 </h2>

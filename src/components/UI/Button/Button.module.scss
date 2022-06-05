@@ -2,6 +2,15 @@
 @import '../../../styles/_config/variables';
 @import '../../../styles/_config/include-fonts';
 
+.button {
+    padding: 4px 22px;
+    border-radius: 80px;
+    &:disabled {
+        color: $color-semi-white;
+        background-color: $color-nobel;
+    }
+}
+
 .input {
     position: relative;
     &__item {

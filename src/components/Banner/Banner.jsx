@@ -22,7 +22,7 @@ const Banner = () => {
                             They should also be excited to learn, as the world
                             of Front-End Development keeps evolving.
                         </p>
-                        <AnchorLink href='#post' className={styles.banner__link + ` link link_color_yellow`}>
+                        <AnchorLink href='#post' className={styles.banner__link + ` hover-btn link link_color_yellow`}>
                             Sign up
                         </AnchorLink>
                     </section>

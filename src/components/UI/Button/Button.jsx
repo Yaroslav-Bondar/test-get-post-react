@@ -16,8 +16,8 @@ const Button = ({isDisabled}) => {
     console.log('isDisabled', isDisabled);
     return (
         isDisabled 
-            ? <button>Submit</button>
-            : <button disabled>Submit</button>
+            ? <button className={styles.button +` hover-btn btn btn_color_yellow`}>Sign up</button>
+            : <button className={styles.button +` btn`} disabled>Sign up</button>
     );
 }
 

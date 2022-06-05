@@ -35,6 +35,7 @@ const Form = () => {
                             );
     const file = useInput(null, 'file',
                                 {
+                                    isFileEmpty: false,
                                     imageDimensions: {height: 70, width: 70, check: 'min'},
                                     fileType: ['image/jpg', 'image/jpeg'],
                                     fileSize: 1048576 //5242880, value in bytes

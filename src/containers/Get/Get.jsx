@@ -14,7 +14,7 @@ const Get = () => {
     const [nextPage, setNextPage] = useState(1);
     const getResource = async (url) => {
         const data = await getApiResource(url);
-        console.log('data', data);
+        // console.log('data', data);
         const usersList = data.users.map(({id,photo,name,position,email,phone}) => {
             return {
                 id,
@@ -25,7 +25,7 @@ const Get = () => {
                 phone,
             }
         }); 
-        console.log('usersList', usersList);
+        // console.log('usersList', usersList);
         setNextPage(data.links.next_url);
         setUsers(usersList);
     }

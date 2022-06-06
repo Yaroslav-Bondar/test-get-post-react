@@ -10,7 +10,7 @@ const Position = ({positions}) => {
             <ul className={styles.position__list}>
                 {positions.map(({id, name}) => 
                     <li key={id} className={styles.position__item}>
-                        <input className={styles.position__radio} id={id} type="radio" name="position" value={name}/>
+                        <input className={styles.position__radio} id={id} type="radio" name='position_id' value={id}/>
                         <label for={id} className={styles.position__job}>
                             {name}
                         </label>

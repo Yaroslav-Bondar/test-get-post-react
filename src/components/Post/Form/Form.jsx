@@ -2,18 +2,23 @@ import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import InputHelper from '../InputHelper';
 import Position from '../Position';
+import Success from '../Success';
 import {useInput} from '../../../hooks/validation/useInput';
+// import {withErrorApi} from '../../../hoc-helpers/withErrorApi';
 import Button from '../../UI/Button';
-import {getApiResource} from '../../../utils/network';
-import {VALID_MESSAGES} from '../../../constants/validation';
-import {RFC2822_EMAIL_VALIDATION} from '../../../constants/validation';
-import {PHONE_VALIDATION} from '../../../constants/validation';
-import {API_POSITIONS_PATH} from '../../../constants/api';
+import {getApiResource, pushFormData} from '../../../utils/network';
+import {RFC2822_EMAIL_VALIDATION,
+        VALID_MESSAGES, 
+        PHONE_VALIDATION} from '../../../constants/validation';
+import {API_USERS_PATH,
+        API_POSITIONS_PATH, 
+        API_TOKEN_PATH} from '../../../constants/api';
 import styles from './Form.module.scss';
 
 const Form = () => {
     const [positions, setPositions] = useState(null);
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isSuccess, setSuccess] = useState({render: false, data: null});
 
     const name = useInput('', 'name', 
                                 {
@@ -50,6 +55,20 @@ const Form = () => {
     );
     console.log('file obj', file);
     console.log('isFormValid', isFormValid);
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
+        console.log('data', data);
+        if(true !== data instanceof Error) {
+            // render success  
+            setSuccess({render: true, data});
+        } else {
+            // render error
+            setSuccess({render: true, data});
+        }
+        
+    };
     useEffect(() => {
         const formValid = [name.state.inputValid,email.state.inputValid,
                             phone.state.inputValid,file.state.inputValid]
@@ -68,7 +87,8 @@ const Form = () => {
 
     return (
         <div className="form">
-            <form className="form__container">
+            {isSuccess.render && <Success data={isSuccess.data}/>}
+            <form id="form" className="form__container" onSubmit={handleSubmit}>
                 <div className="form__inputs">
                     <div className={styles.form__wrap}>
                         <InputHelper 
@@ -127,10 +147,7 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="form__positions">
-            
-                    {/* <div className="form__position"> */}
-                        {positions && <Position positions={positions}/>}
-                    {/* </div> */}
+                    {positions && <Position positions={positions}/>}
                 </div>
                 <div className="form__file">
                     <div className="form__input">
@@ -157,7 +174,8 @@ const Form = () => {
 }
 
 // Form.propTypes = {
-//     text: PropTypes.
+//     setErrorApi: PropTypes.func,
 // }
 
+// export default withErrorApi(Form);
 export default Form;

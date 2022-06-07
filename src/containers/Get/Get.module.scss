@@ -1,3 +1,5 @@
+@import '../../styles/_mixins/alignment';
+
 .get {
     &__container {
         padding-top: 140px;
@@ -7,5 +9,17 @@
     }
     &__users {
         margin-top: 50px;
+    }
+    &__more {
+
+    }
+    &__error {
+        padding: 30px 0;
+        text-align: center
+        // @include flex-center;
+    }
+    &__preloader {
+        padding: 30px 0;
+        @include flex-center;
     }
 }

@@ -10,7 +10,7 @@ const ErrorMessage = ({error}) => {
     // console.log(errorApi.stack);
     return (
         <>
-            <h1 className={styles.error__message}>{error.toString()}</h1>
+            <h3 className={styles.error__message}>{error.toString()}</h3>
         </>
     );
 }

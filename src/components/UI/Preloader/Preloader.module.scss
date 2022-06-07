@@ -1,0 +1,15 @@
+.preloader {
+    width: 48px;
+    height: 48px;
+    &__item {
+        animation: preloader-spin infinite 1.8s linear;
+    }
+  }
+@keyframes preloader-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}

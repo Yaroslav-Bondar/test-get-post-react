@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import Preloader from '../../components/UI/Preloader';
+import ErrorMessage from '../../components/ErrorMessage';
 import Card from '../../components/Get/Card';
 import More from '../../components/Get/More';
 import {getApiResource} from '../../utils/network';
@@ -9,7 +10,7 @@ import {API_USERS_PATH,
 import styles from './Get.module.scss';
 
 const Get = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const [nextPage, setNextPage] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
@@ -33,7 +34,10 @@ const Get = () => {
             }); 
             setNextPage(data.links.next_url);
             // adding users to otput
-            setUsers(prevState => {return [...prevState, ...usersList]});
+            setUsers(prevState => {
+                if(!prevState) prevState = [];
+                return [...prevState, ...usersList]
+            });
             setIsPending(false);
             setError(null);
         }
@@ -48,18 +52,35 @@ const Get = () => {
                     <h2 className={styles.get__title +` title`}>
                         Working with GET request
                     </h2>
-                    <div className={styles.get__users}>
-                        {users && <Card users = {users}/>}
-                        {nextPage && <More 
-                                        nextPage = {nextPage}
-                                        getResource = {getResource}
-                                        setIsPending = {setIsPending}
-                                        setError = {setError}
-                                        />
-                        }
-                    </div>
-                    {error && <div>{error}</div>}
-                    {isPending && <Preloader/>}
+                    { 
+                        users &&                        
+                            <div className={styles.get__users}>
+                                <Card users = {users}/>
+                            </div>
+                    }
+                    {
+                        error &&
+                            <div className={styles.get__error}>
+                                <ErrorMessage error={error}/>
+                            </div>
+                    }
+                    {
+                        isPending && 
+                            <div className={styles.get__preloader}>
+                                <Preloader/>
+                            </div>
+                    }
+                    {
+                        nextPage && 
+                            <div className={styles.get__more}>
+                                <More 
+                                    nextPage = {nextPage}
+                                    getResource = {getResource}
+                                    setIsPending = {setIsPending}
+                                    setError = {setError}
+                                />
+                        </div>
+                    }
                 </div>
             </section>
         </>
@@ -69,5 +90,5 @@ const Get = () => {
 // Get.propTypes = {
 //     text: PropTypes.
 // }
-
+// console.log('Get', Get);
 export default Get;

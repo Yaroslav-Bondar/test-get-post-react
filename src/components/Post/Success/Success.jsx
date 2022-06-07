@@ -7,7 +7,7 @@ import ErrorMessage from '../../ErrorMessage';
 import styles from './Success.module.scss';
 // {setErrorApi, 
 const Success = ({data}) => {
-    console.log('data', data);
+    // console.log('data', data);
     // console.log('setErrorApi', setErrorApi);
     // useEffect(()=> {
     //     console.log('Use Effect', data);

@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import PropTypes from 'prop-types';
 // import {withErrorApi} from '../../../hoc-helpers/withErrorApi';
 import SuccessMessage from '../SuccessMessage';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../../ErrorMessage';
 
 import styles from './Success.module.scss';
 // {setErrorApi, 

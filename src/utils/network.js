@@ -6,13 +6,18 @@
  */
 //  , options
 export const getApiResource = async url => {
-    
-    const response = await fetch(url);
-    
-    console.log(response);
-    const data = await response.json();
-    // console.log(data);
-    return data;
+    try {
+        const response = await fetch(url);
+        // console.log(response);
+        const data = await response.json();
+        if(!data.success) {
+            throw Error(`proccess server errors: , ${data.message}`)
+        }
+        console.log(data);
+        return data;
+    } catch(error) {
+        return error;
+    }
 
 }
 export const pushFormData = async (form, urlPath, urlToken) => {

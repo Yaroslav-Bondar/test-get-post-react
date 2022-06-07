@@ -55,7 +55,8 @@ const Form = () => {
     );
     console.log('file obj', file);
     console.log('isFormValid', isFormValid);
-    
+    console.log('isSuccess', isSuccess);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);

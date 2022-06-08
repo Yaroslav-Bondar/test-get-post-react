@@ -8,7 +8,7 @@ import styles from './InputHelper.module.scss';
  * @param {object} messages - a set of messages to correct user input
  * @returns {jsx} jsx - jsx for rendering messages 
  */
-const InputHelper = ({helper, messages}) => {
+const InputHelper = ({helper, messages, children}) => {
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -20,7 +20,7 @@ const InputHelper = ({helper, messages}) => {
     
     // set error message from messages object
     function errorMessageTuner() {
-        for(const error in helper.errors) { // * to function
+        for(const error in helper.errors) { 
             if(helper.errors[error]) {
                 setErrorMessage(messages.errors[error]);
                 break;
@@ -53,20 +53,29 @@ const InputHelper = ({helper, messages}) => {
         }
     });
     return (
-        <>
+        <div className={!isError ? 
+                            styles.helper : 
+                            styles.helper + ' ' + styles.helper_error
+                        }
+        >
             {isError && 
-                <div style={{color: 'red'}}>
+                <div className={styles.helper__error}>
                     {errorMessage}
                 </div>}
             {isTip && 
-                <div style={{color: 'blue'}}>
+                <div className={styles.helper__tip}>
                     {tipMessage}
                 </div>} 
             {isLabel &&  
-                <div style={{color: 'blue'}}> 
+                <div className={!isError ? 
+                                    styles.helper__label : 
+                                    styles.helper__label + ' ' + styles.helper__label_error
+                                }
+                > 
                     {labelMessage}
                 </div>}
-        </>
+                {children}  
+        </div>
     );
 }
 

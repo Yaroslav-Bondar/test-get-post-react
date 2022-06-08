@@ -3,28 +3,28 @@ export const PHONE_VALIDATION = /^[\+]{0,1}380([0-9]{9})$/;
 
 const HELPER_MESSAGES = {
     name: {
-        helper: 'should be 2-60 characters',
-        label: 'user name',
+        helper: 'Should be 2-60 characters',
+        label: 'User name',
     },
     email: {
-        helper: 'must be a valid email according to RFC2822',
-        label: 'email',
+        helper: 'Must be a valid email according to RFC2822',
+        label: 'Email',
     },
     phone: {
-        helper: 'should start with code of Ukraine +380',
-        label: 'phone number',
+        helper: 'Should start with code of Ukraine +380',
+        label: 'Phone number',
     }
 }
 // a set of messages to correct user input
 export const VALID_MESSAGES = {
     errors : {
-        minLengthError: 'too few characters entered',
-        maxLengthError: 'too many characters', 
-        isEmptyError: 'field can not be empty',
-        patternError: 'input doesn`t match validation pattern',
-        imageDimensionsError: 'must be at least 70x70px',
-        fileTypeError: 'should be jpg/jpeg image',
-        fileSizeError: 'size must not exceed 5MB',
+        minLengthError: 'Too few characters entered',
+        maxLengthError: 'Too many characters', 
+        isEmptyError: 'Field can not be empty',
+        patternError: 'Input doesn`t match validation pattern',
+        imageDimensionsError: 'Must be at least 70x70px',
+        fileTypeError: 'Should be jpg/jpeg image',
+        fileSizeError: 'Size must not exceed 5MB',
     },
     ...HELPER_MESSAGES,
 }

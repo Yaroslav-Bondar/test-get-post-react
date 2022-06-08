@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import preloader from './img/preloader.svg';
 import styles from './Preloader.module.scss';
 
@@ -9,9 +8,5 @@ const Preloader = () => {
         </div>
     );
 }
-
-// Preloader.propTypes = {
-//     text: PropTypes.
-// }
 
 export default Preloader;

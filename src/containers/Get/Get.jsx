@@ -18,7 +18,7 @@ const Get = () => {
         const data = await getApiResource(url);
         if(data instanceof Error) {
             // set error message (since data == Error)
-            setError(data.message);
+            setError(data);
             setIsPending(false);
         } else {
             const usersList = data.users.map(({id,photo,name,position,email,phone}) => {

@@ -15,6 +15,7 @@ export const getApiResource = async url => {
         console.log(data);
         return data;
     } catch(error) {
+        // console.log('getApiResource',error);
         return error;
     }
 

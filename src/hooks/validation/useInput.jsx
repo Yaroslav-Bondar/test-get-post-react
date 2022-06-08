@@ -24,9 +24,9 @@ const useInput = (initialValue, id, validations) => {
         setFileName(file.name);
     }
     
-    // const onBlur = (e) => {
-    //     setIsFocus(false);
-    // }
+    const onBlur = (e) => {
+        setIsFocus(false);
+    }
 
     const onFocus = (e) => {
         setIsFocus(true);
@@ -37,7 +37,7 @@ const useInput = (initialValue, id, validations) => {
         handlers: {
             onChange,
             onChangeFile,
-            // onBlur,
+            onBlur,
             onFocus,
         },
         values: {

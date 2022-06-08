@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import ErrorMessage from '../../ErrorMessage';
 import Modal from '../../Modal';
 import InputHelper from '../InputHelper';
@@ -64,6 +64,7 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // submitting form data for user registration
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
         // console.log('data', data);
         setResponse(data);
@@ -81,8 +82,9 @@ const Form = () => {
     useEffect(() => {
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
+            // check for Error
             if(data instanceof Error) {
-                setError(data.message);
+                setError(data);
                 setIsPending(false);
             } else {
                 setPositions(data.positions);
@@ -93,7 +95,7 @@ const Form = () => {
     }, []);
     // + ' ' + styles.form__preloader_absolute
     return (
-        <div className="form">
+        <div className={styles.form}>
             <div className={styles.form__modal}>
                 <Modal 
                     active={modalActive}
@@ -103,61 +105,67 @@ const Form = () => {
                 </Modal>
             </div>
             <form id="form" className={styles.form__container} onSubmit={handleSubmit}>
-                <div className="form__inputs">
-                    <div className={styles.form__wrap}>
-                        <InputHelper 
+                <div className={styles.form__inputs}>
+                    <div className={styles.form__helper}>
+                        <InputHelper
                             helper = {name}
                             messages = {VALID_MESSAGES} 
-                        />
-                        <input
-                            id="name" 
-                            className={styles.form__input}
-                            type="text" 
-                            aria-label="user name"
-                            name="name"
-                            placeholder="Your name"
-                            required
-                            value={name.values.value}
-                            onChange={(e) => name.handlers.onChange(e)}
-                            // onBlur={(e) => name.handlers.onBlur(e)}
-                            onFocus={(e) => name.handlers.onFocus(e)}
-                        />
+                        > 
+                            <input
+                                id="name" 
+                                className={styles.form__input}
+                                type="text" 
+                                aria-label="user name"
+                                name="name"
+                                placeholder="Your name"
+                                required
+                                value={name.values.value}
+                                onChange={(e) => name.handlers.onChange(e)}
+                                onBlur={(e) => name.handlers.onBlur(e)}
+                                onFocus={(e) => name.handlers.onFocus(e)}
+                            />
+                        
+                        </InputHelper>
                     </div>
-                    <div className="form__input">   
-                        <InputHelper 
+                    <div className={styles.form__helper}>   
+                        <InputHelper
                             helper = {email}
                             messages = {VALID_MESSAGES} 
-                        />
-                        <input
-                            id="email" 
-                            type="email" 
-                            aria-label="email"
-                            name="email"
-                            placeholder="Email"
-                            required
-                            value={email.values.value}
-                            onChange={(e) => email.handlers.onChange(e)}
-                            // onBlur={(e) => email.handlers.onBlur(e)}
-                            onFocus={(e) => email.handlers.onFocus(e)}
-                        />
+                        > 
+                            <input
+                                id="email" 
+                                className={styles.form__input}
+                                type="email" 
+                                aria-label="email"
+                                name="email"
+                                placeholder="Email"
+                                required
+                                value={email.values.value}
+                                onChange={(e) => email.handlers.onChange(e)}
+                                onBlur={(e) => email.handlers.onBlur(e)}
+                                onFocus={(e) => email.handlers.onFocus(e)}
+                            />
+                        </InputHelper>
                     </div>
-                    <div className="form__input">   
-                        <InputHelper 
+                    <div className={styles.form__helper}>   
+                        <InputHelper
                             helper = {phone}
                             messages = {VALID_MESSAGES} 
-                        />
-                        <input
-                            id="phone" 
-                            type="tel" 
-                            aria-label="phone number"
-                            name="phone"
-                            placeholder="Phone"
-                            required
-                            value={phone.values.value}
-                            onChange={(e) => phone.handlers.onChange(e)}
-                            // onBlur={(e) => phone.handlers.onBlur(e)}
-                            onFocus={(e) => phone.handlers.onFocus(e)}
-                        />
+                        > 
+                            <input
+                                id="phone"
+                                className={styles.form__input} 
+                                type="tel" 
+                                aria-label="phone number"
+                                name="phone"
+                                placeholder="Phone"
+                                required
+                                value={phone.values.value}
+                                onChange={(e) => phone.handlers.onChange(e)}
+                                onBlur={(e) => phone.handlers.onBlur(e)}
+                                onFocus={(e) => phone.handlers.onFocus(e)}
+                            />
+                        </InputHelper>
                     </div>
                 </div>
                 <div className="form__positions">
@@ -177,7 +185,6 @@ const Form = () => {
                             </div>
                     }
                     {
-
                         positions && 
                             <Position positions={positions}/>
                     }

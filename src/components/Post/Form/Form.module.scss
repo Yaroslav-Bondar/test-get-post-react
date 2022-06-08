@@ -1,38 +1,41 @@
 @import '../../../styles/_config/variables';
-// @import '../../../styles/_mixins/variables';
+@import '../../../styles/_config/include-fonts';
 
 .form {
-    &__wrap {
-
-    }
     &__container {
-        position: relative;
+        // position: relative;
     }
+        &__helper {
+            &:not(:last-child) {
+                margin-bottom: 50px;
+            }
+        }
     &__input {
         height: 54px;
-        background-color: $color-alabaster;
-        border: 1px solid $color-alto;
-        border-radius: 4px;
+        width: 100%;
+        padding: 0 16px;
+        background-color: transparent;
+        border: none;
+        font-family: $font-family-base;
+        @include font-nunito-regular;
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        color: $color-gray;
+        outline: none;
+        &:invalid {
+            background-color: aquamarine;
+        }
     }
     &__position-title {
         margin-bottom: 11px;  
-    }
-    &__modal {
-        // position: fixed;
-        // // position: absolute;
-        // top: 50%;
-        // left: 50%;
-        // transform: translate(-50%, -50%);
-        
     }
     &__preloader {
         display: flex;
         justify-content: center;
         padding: $spacing-small 0;
-        // &_absolute {
-        // }
     }
     &__error {
+        text-align: center;
         padding: $spacing-medium 0;    
     }
 }

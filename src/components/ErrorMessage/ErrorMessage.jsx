@@ -9,9 +9,9 @@ const ErrorMessage = ({error}) => {
     // console.log(errorApi);
     // console.log(errorApi.stack);
     return (
-        <>
+        <div classes={styles.error}>
             <h3 className={styles.error__message}>{error.toString()}</h3>
-        </>
+        </div>
     );
 }
 

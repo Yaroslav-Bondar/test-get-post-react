@@ -1,13 +1,38 @@
 @import '../../../styles/_config/variables';
+// @import '../../../styles/_mixins/variables';
 
 .form {
     &__wrap {
 
+    }
+    &__container {
+        position: relative;
     }
     &__input {
         height: 54px;
         background-color: $color-alabaster;
         border: 1px solid $color-alto;
         border-radius: 4px;
+    }
+    &__position-title {
+        margin-bottom: 11px;  
+    }
+    &__modal {
+        // position: fixed;
+        // // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        
+    }
+    &__preloader {
+        display: flex;
+        justify-content: center;
+        padding: $spacing-small 0;
+        // &_absolute {
+        // }
+    }
+    &__error {
+        padding: $spacing-medium 0;    
     }
 }

@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import Preloader from '../../../components/UI/Preloader';
 import InputHelper from '../InputHelper';
 import Position from '../Position';
-import Success from '../Success';
+import Modal from '../Modal';
+import Response from '../Response';
+
+import ErrorMessage from '../../ErrorMessage';
 import {useInput} from '../../../hooks/validation/useInput';
 // import {withErrorApi} from '../../../hoc-helpers/withErrorApi';
 import Button from '../../UI/Button';
@@ -18,7 +22,10 @@ import styles from './Form.module.scss';
 const Form = () => {
     const [positions, setPositions] = useState(null);
     const [isFormValid, setIsFormValid] = useState(false);
-    const [isSuccess, setSuccess] = useState({render: false, data: null});
+    const [response, setResponse] = useState(null);
+    const [modalActive, setModalActive] = useState(false);
+    const [error, setError] = useState(null);
+    const [isPending, setIsPending] = useState(true);
 
     const name = useInput('', 'name', 
                                 {
@@ -55,19 +62,21 @@ const Form = () => {
     );
     console.log('file obj', file);
     console.log('isFormValid', isFormValid);
-    console.log('isSuccess', isSuccess);
+    // console.log('isSuccess', isSuccess);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
         console.log('data', data);
-        if(true !== data instanceof Error) {
+        // if(true !== data instanceof Error) {
             // render success  
-            setSuccess({render: true, data});
-        } else {
+            setResponse(data);
+            setModalActive(true);
+        // } else {
             // render error
-            setSuccess({render: true, data});
-        }
+            // setResponse(data);
+            // setModalActive(true);
+        // }
         
     };
     useEffect(() => {
@@ -82,14 +91,37 @@ const Form = () => {
     useEffect(() => {
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
-            setPositions(data.positions);
+            if(data instanceof Error) {
+                setError(data.message);
+                setIsPending(false);
+            } else {
+                setPositions(data.positions);
+                setIsPending(false);
+                setError(null);
+            }
         })();
     }, []);
-
+    // + ' ' + styles.form__preloader_absolute
     return (
         <div className="form">
-            {isSuccess.render && <Success data={isSuccess.data}/>}
-            <form id="form" className="form__container" onSubmit={handleSubmit}>
+            {
+                // modalActive && 
+                    <div className={styles.form__modal}>
+                        <Modal 
+                            active={modalActive}
+                            setModalActive={setModalActive} 
+                            // response={response}
+                        >
+                            
+                            {response && <Response response ={response}/>}
+                                {/* response instanceof Error ?
+                                <ErrorMessage error ={response}/> :
+                                <SuccessMessage message={response.message}/>
+                            } */}
+                        </Modal>
+                    </div>
+            }
+            <form id="form" className={styles.form__container} onSubmit={handleSubmit}>
                 <div className="form__inputs">
                     <div className={styles.form__wrap}>
                         <InputHelper 
@@ -148,7 +180,26 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="form__positions">
-                    {positions && <Position positions={positions}/>}
+                    <div className={styles[`form__position-title`]}>
+                        Select your position
+                    </div>
+                    {
+                        isPending && 
+                            <div className={styles.form__preloader}>
+                                <Preloader/>
+                            </div>                        
+                    }
+                    {
+                        error &&
+                            <div className={styles.form__error}>
+                                <ErrorMessage error={error}/>
+                            </div>
+                    }
+                    {
+
+                        positions && 
+                            <Position positions={positions}/>
+                    }
                 </div>
                 <div className="form__file">
                     <div className="form__input">

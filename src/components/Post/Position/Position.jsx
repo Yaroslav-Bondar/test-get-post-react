@@ -4,9 +4,9 @@ import styles from './Position.module.scss';
 const Position = ({positions}) => {
     return (
         <div className={styles.position}>
-            <div className={styles.position__title}>
+            {/* <div className={styles.position__title}>
                 Select your position
-            </div>
+            </div> */}
             <ul className={styles.position__list}>
                 {positions.map(({id, name}) => 
                     <li key={id} className={styles.position__item}>

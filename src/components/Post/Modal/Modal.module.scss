@@ -1,0 +1,39 @@
+@import '../../../styles/_config/variables';
+@import '../../../styles/_mixins/alignment';
+
+.modal {
+    position: fixed;
+    @include flex-center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    &_active {
+        opacity: 1;
+        pointer-events: all;
+    }
+    &__container {
+        position: relative;
+        width: 50vw;
+        padding: $spacing-medium;
+        border-radius: 12px;
+        background-color: $color-white;
+        transform: scale(0.5);
+        transition: transform .2s;
+        &_active {
+            transform: scale(1);
+        }
+    }
+    &__close {
+        position: absolute;
+        top: $spacing-ultrasmall;
+        right: $spacing-medium;
+        font-size: 26px;
+        cursor: pointer;
+    }
+}

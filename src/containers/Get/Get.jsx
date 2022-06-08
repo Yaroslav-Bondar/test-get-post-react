@@ -21,7 +21,6 @@ const Get = () => {
             setError(data.message);
             setIsPending(false);
         } else {
-            // console.log('data', data);
             const usersList = data.users.map(({id,photo,name,position,email,phone}) => {
                 return {
                     id,

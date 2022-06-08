@@ -4,14 +4,13 @@
  * @param {String} url - url for request
  * @returns {Promise} - Promise with query result
  */
-//  , options
 export const getApiResource = async url => {
     try {
         const response = await fetch(url);
         // console.log(response);
         const data = await response.json();
         if(!data.success) {
-            throw Error(`proccess server errors: , ${data.message}`)
+            throw Error(`proccess server errors: ${data.message}`)
         }
         console.log(data);
         return data;
@@ -29,8 +28,7 @@ export const pushFormData = async (form, urlPath, urlToken) => {
         console.log('token', token);
         if(!token.success) {
             // console.log('proccess server errors: ', token.message);
-            // return false;
-            throw Error(`proccess server errors: , ${token.message}`)
+            throw Error(`proccess server errors: ${token.message}`)
         } else {
             // post request
             const response = await fetch(urlPath, 
@@ -43,7 +41,7 @@ export const pushFormData = async (form, urlPath, urlToken) => {
             const data = await response.json();
             console.log('data', data);
             if(!data.success) {
-                throw Error(`proccess server errors: , ${data.message}`)
+                throw Error(`proccess server errors: ${data.message}`)
                 // console.log('proccess server errors: ', data.message);
                 // return false;
             } else {
@@ -52,8 +50,6 @@ export const pushFormData = async (form, urlPath, urlToken) => {
         }
     } catch(error) {
         return error; 
-        // console.log('proccess network errors: ', error);
-        // return false;
     }
 }
 

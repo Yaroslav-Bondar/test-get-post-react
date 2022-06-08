@@ -7,7 +7,7 @@ const Response = ({response}) => {
     return (
         <>
             {
-                response &&
+                // response &&
                 response instanceof Error ?
                 <ErrorMessage error ={response}/> :
                 <SuccessMessage message={response.message}/>

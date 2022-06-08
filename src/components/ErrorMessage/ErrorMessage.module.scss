@@ -1,0 +1,12 @@
+@import '../../styles/_config/variables';
+
+.error {
+    text-align: center;
+    &__title {
+        color: $color-mahogany;
+        margin-bottom: $spacing-small;
+    }
+    // &__text {
+
+    // }
+}

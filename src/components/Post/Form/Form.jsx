@@ -1,14 +1,12 @@
 import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import Preloader from '../../../components/UI/Preloader';
+import ErrorMessage from '../../ErrorMessage';
+import Modal from '../../Modal';
 import InputHelper from '../InputHelper';
 import Position from '../Position';
-import Modal from '../Modal';
 import Response from '../Response';
-
-import ErrorMessage from '../../ErrorMessage';
 import {useInput} from '../../../hooks/validation/useInput';
-// import {withErrorApi} from '../../../hoc-helpers/withErrorApi';
+import Preloader from '../../../components/UI/Preloader';
 import Button from '../../UI/Button';
 import {getApiResource, pushFormData} from '../../../utils/network';
 import {RFC2822_EMAIL_VALIDATION,
@@ -67,17 +65,9 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
-        console.log('data', data);
-        // if(true !== data instanceof Error) {
-            // render success  
-            setResponse(data);
-            setModalActive(true);
-        // } else {
-            // render error
-            // setResponse(data);
-            // setModalActive(true);
-        // }
-        
+        // console.log('data', data);
+        setResponse(data);
+        setModalActive(true);
     };
     useEffect(() => {
         const formValid = [name.state.inputValid,email.state.inputValid,
@@ -104,23 +94,14 @@ const Form = () => {
     // + ' ' + styles.form__preloader_absolute
     return (
         <div className="form">
-            {
-                // modalActive && 
-                    <div className={styles.form__modal}>
-                        <Modal 
-                            active={modalActive}
-                            setModalActive={setModalActive} 
-                            // response={response}
-                        >
-                            
-                            {response && <Response response ={response}/>}
-                                {/* response instanceof Error ?
-                                <ErrorMessage error ={response}/> :
-                                <SuccessMessage message={response.message}/>
-                            } */}
-                        </Modal>
-                    </div>
-            }
+            <div className={styles.form__modal}>
+                <Modal 
+                    active={modalActive}
+                    setModalActive={setModalActive} 
+                >
+                    {response && <Response response={response}/>}
+                </Modal>
+            </div>
             <form id="form" className={styles.form__container} onSubmit={handleSubmit}>
                 <div className="form__inputs">
                     <div className={styles.form__wrap}>
@@ -204,8 +185,8 @@ const Form = () => {
                 <div className="form__file">
                     <div className="form__input">
                         <InputHelper 
-                            helper = {file}
-                            messages = {VALID_MESSAGES} 
+                            helper={file}
+                            messages={VALID_MESSAGES} 
                         />
                         <input 
                             className="form__photo"
@@ -228,6 +209,4 @@ const Form = () => {
 // Form.propTypes = {
 //     setErrorApi: PropTypes.func,
 // }
-
-// export default withErrorApi(Form);
 export default Form;

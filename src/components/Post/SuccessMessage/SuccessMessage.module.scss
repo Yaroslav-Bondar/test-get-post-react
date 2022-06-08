@@ -1,0 +1,12 @@
+.success {
+    &__title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    &__img {
+        &-item {
+            height: 40vmin;
+            pointer-events: none;
+        }
+    }
+}

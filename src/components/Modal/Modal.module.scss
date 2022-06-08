@@ -1,5 +1,5 @@
-@import '../../../styles/_config/variables';
-@import '../../../styles/_mixins/alignment';
+@import '../../styles/_config/variables';
+@import '../../styles/_mixins/alignment';
 
 .modal {
     position: fixed;
@@ -20,7 +20,7 @@
     &__container {
         position: relative;
         width: 50vw;
-        padding: $spacing-medium;
+        padding: $spacing-large;
         border-radius: 12px;
         background-color: $color-white;
         transform: scale(0.5);
@@ -31,9 +31,9 @@
     }
     &__close {
         position: absolute;
-        top: $spacing-ultrasmall;
-        right: $spacing-medium;
-        font-size: 26px;
+        top: 6px;
+        right: 17px;
+        font-size: 24px;
         cursor: pointer;
     }
 }

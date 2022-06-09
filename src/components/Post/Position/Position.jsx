@@ -5,9 +5,16 @@ const Position = ({positions}) => {
     return (
         <div className={styles.position}>
             <ul className={styles.position__list}>
-                {positions.map(({id, name}) => 
+                {positions.map(({id, name}, index) =>
                     <li key={id} className={styles.position__item}>
-                        <input className={styles.position__radio} id={id} type="radio" name='position_id' value={id}/>
+                        <input 
+                            type="radio" 
+                            id={id} 
+                            className={styles.position__radio} 
+                            name='position_id' 
+                            value={id}
+                            checked={index === 0}
+                        />
                         <label for={id} className={styles.position__job}>
                             {name}
                         </label>

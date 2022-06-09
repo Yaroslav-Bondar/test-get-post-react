@@ -1,20 +1,12 @@
 import {useState, useEffect} from 'react';
+import {checkInputValid} from '../../services/validation/validation'; 
 import {checkImageDimensions} from '../../services/validation/checkImageDimensions';
 
 const useValidation = (value, fileValue, validations) => {
-    // single errors 
-    // const [isEmptyError, setIsEmptyError] = useState(true);
-    // const [isFileEmptyError, setIsFileEmptyError] = useState(true);
-    // const [minLengthError, setMinLengthError] = useState(false);
-    // const [maxLengthError, setMaxLengthError] = useState(false);
-    // const [patternError, setPatternError] = useState(false);
-    // const [imageDimensionsError, setImageDimensionsError] = useState(false);
-    // const [fileTypeError, setFileTypeError] = useState(false);
-    // const [fileSizeError, setFileSizeError] = useState(false);
-    // group errors
-    const [inputErrors, setInputErrors] = useState({});
+    // errors for a specific input field
+    const [inputErrors, setInputErrors] = useState(null);
+    // is input field valid 
     const [inputValid, setInputValid] = useState(false);
-    // const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
         const errors = {};
@@ -23,61 +15,48 @@ const useValidation = (value, fileValue, validations) => {
                 switch (validation) {
                     case 'minLength':
                         if(value.length < validations[validation]) {
-                            // setMinLengthError(true);
                             errors.minLengthError = true;
                         } else {
-                            // setMinLengthError(false);
                             errors.minLengthError = false;
                         }
                         break;
                     case 'isEmpty':
                         if(value) {
-                            // setIsEmptyError(false);
                             errors.isEmptyError = false;
                         } else {
                             errors.isEmptyError = true;
-                            // setIsEmptyError(true);
                         }
                         break;
                     case 'maxLength':
                         if(value.length > validations[validation]) {
-                            // setMaxLengthError(true);
                             errors.maxLengthError = true;
                         } else {
                             errors.maxLengthError = false;
-                            // setMaxLengthError(false);
                         }
                         break;
                     case 'pattern':
                         if(validations[validation].test(value.toLowerCase())) {
-                            // setPatternError(false);
                             errors.patternError = false;
                         } else {
-                            // setPatternError(true);
                             errors.patternError = true;
                         }
                         break;
                     case 'isFileEmpty': 
                         if(fileValue) {
-                            // setIsFileEmptyError(false);
                             errors.isFileEmptyError = false;
                         } else {
-                            // setIsFileEmptyError(true);
                             errors.isFileEmptyError = true;
                         }
                         break;    
                     case 'imageDimensions':
                         if(!fileValue) {
-                            // set error names and values for input
                             errors.imageDimensionsError = false;
                             break;
                         } 
                         const isImageDimensions = await checkImageDimensions(validations, fileValue);
                         if(isImageDimensions) {
-                            // setImageDimensionsError(true);
                             errors.imageDimensionsError = true;
                         } else {
-                            // setImageDimensionsError(false);
                             errors.imageDimensionsError = false;
                         }
                         break;
@@ -88,10 +67,8 @@ const useValidation = (value, fileValue, validations) => {
                         }
                         const isType = validations[validation].includes(fileValue.type);  
                         if(isType) {
-                            // setFileTypeError(false);
                             errors.fileTypeError = false;               
                         } else {
-                            // setFileTypeError(true);
                             errors.fileTypeError = true;
                         }
                         break;
@@ -101,10 +78,8 @@ const useValidation = (value, fileValue, validations) => {
                             break;
                         }
                         if(fileValue.size > validations[validation]) {
-                            // setFileSizeError(true);
                             errors.fileSizeError = true;
                         } else {
-                            // setFileSizeError(false);
                             errors.fileSizeError = false;
                         }
                         break;
@@ -113,12 +88,7 @@ const useValidation = (value, fileValue, validations) => {
             // set error names and values for input
             setInputErrors(errors);
             // set validation status for input
-            const errorsValue = Object.values(errors);
-            if(!errorsValue.includes(true)) {
-                setInputValid(true);
-            } else {
-                setInputValid(false);
-            }
+            setInputValid(checkInputValid(errors)); 
         })();
     }, [value, fileValue]);
 

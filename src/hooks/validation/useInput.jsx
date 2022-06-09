@@ -8,7 +8,6 @@ const useInput = (initialValue, id, validations) => {
     const [isFocus, setIsFocus] = useState(false);
     const [fileValue, setFileValue] = useState(initialValue);
     const [fileName, setFileName] = useState('');
-    // setFormValid(true);
     // input validation
     const valid = useValidation(value, fileValue, validations);
     console.log('valid', valid); 

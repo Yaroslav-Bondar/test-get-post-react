@@ -1,15 +1,17 @@
 @import '../../../styles/_config/variables';
 @import '../../../styles/_config/include-fonts';
+@import '../../../styles/_mixins/alignment';
 
 .form {
     &__container {
-        // position: relative;
+        width: 380px;
+        margin: 0 auto;
     }
-        &__helper {
-            &:not(:last-child) {
-                margin-bottom: 50px;
-            }
+    &__helper {
+        &:not(:last-child) {
+            margin-bottom: 50px;
         }
+    }
     &__input {
         height: 54px;
         width: 100%;
@@ -22,12 +24,12 @@
         line-height: $line-height-base;
         color: $color-gray;
         outline: none;
-        &:invalid {
-            background-color: aquamarine;
-        }
     }
-    &__position-title {
-        margin-bottom: 11px;  
+    &__position {
+        margin: 43px 0 50px 0;
+        &-title {
+            margin-bottom: 11px;  
+        }
     }
     &__preloader {
         display: flex;
@@ -35,7 +37,26 @@
         padding: $spacing-small 0;
     }
     &__error {
-        text-align: center;
+        // text-align: center;
         padding: $spacing-medium 0;    
+    }
+    &__file {
+
+    }
+    &__photo {
+        width: 0;
+        height: 0;
+        &-label {
+            // display: block;
+            @include flex-center;
+            // width: 83px;
+            // height: 54px;
+            height: inherit;
+            padding: 14px 15px;
+            cursor: pointer;
+
+            // border: 1px solid $color-dark;
+            // border-radius: 4px 0px 0px 4px;
+        }
     }
 }

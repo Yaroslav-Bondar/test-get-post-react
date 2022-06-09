@@ -18,8 +18,11 @@ const InputHelper = ({helper, messages, children}) => {
     const [isLabel, setIsLabel] = useState(false);
     const [labelMessage, setLabelMessage] = useState('');
     
-    // set error message from messages object
-    function errorMessageTuner() {
+    /**
+     * set error message from messages object
+     * by the name of the error sets the corresponding messages
+     */
+    function getErrorMessage() {
         for(const error in helper.errors) { 
             if(helper.errors[error]) {
                 setErrorMessage(messages.errors[error]);
@@ -34,7 +37,7 @@ const InputHelper = ({helper, messages, children}) => {
             // set error state
             setIsError(error);
             // set error message
-            errorMessageTuner();
+            getErrorMessage();
         } else {
             // rendering condition
             const error = !helper.errors.isEmptyError && !helper.state.inputValid; 
@@ -45,7 +48,7 @@ const InputHelper = ({helper, messages, children}) => {
             setIsTip(tip);
             setIsLabel(label);
             // set Error message
-            errorMessageTuner();
+            getErrorMessage();
             // set Tip message
             setTipMessage(messages[helper.id].helper);
             // set Label message
@@ -53,29 +56,46 @@ const InputHelper = ({helper, messages, children}) => {
         }
     });
     return (
-        <div className={!isError ? 
-                            styles.helper : 
-                            styles.helper + ' ' + styles.helper_error
-                        }
-        >
-            {isError && 
-                <div className={styles.helper__error}>
-                    {errorMessage}
-                </div>}
-            {isTip && 
-                <div className={styles.helper__tip}>
-                    {tipMessage}
-                </div>} 
-            {isLabel &&  
+        <>
+            { helper.id === 'file' && 
+                <div className={styles.file}>
+                    <div className={styles.file__btn}>
+                        {children}
+                    </div>
+                    <div className={styles.file__preview}>
+                        <span className={styles[`file__preview-text`]}>
+                            Upload your photo
+                        </span>
+                    </div>
+                </div>
+            }
+            { helper.id !== 'file' &&
                 <div className={!isError ? 
-                                    styles.helper__label : 
-                                    styles.helper__label + ' ' + styles.helper__label_error
+                                    styles.helper : 
+                                    styles.helper + ' ' + styles.helper_error
                                 }
-                > 
-                    {labelMessage}
-                </div>}
-                {children}  
-        </div>
+                >
+                    {isError && 
+                        <div className={styles.helper__error}>
+                            {errorMessage}
+                        </div>}
+                    {isTip && 
+                        <div className={styles.helper__tip}>
+                            {tipMessage}
+                        </div>} 
+                    {isLabel &&  
+                        <div className={!isError ? 
+                                            styles.helper__label : 
+                                            styles.helper__label + ' ' + styles.helper__label_error
+                                        }
+                        > 
+                            {labelMessage}
+                        </div>}
+                    {children}  
+                </div>
+
+            }        
+        </>    
     );
 }
 

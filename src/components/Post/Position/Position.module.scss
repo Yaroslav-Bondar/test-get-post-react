@@ -2,15 +2,14 @@
 @import '../../../styles/_mixins/alignment';
 
 .position {
-    // &__title {
-    //     margin-bottom: 11px;
-    // }
     &__list {
         list-style-type: none;
     }
     &__item {
         @include flex-center-v;
-
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
     }
     &__radio {
         -webkit-appearance: none;

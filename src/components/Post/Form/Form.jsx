@@ -9,6 +9,7 @@ import {useInput} from '../../../hooks/validation/useInput';
 import Preloader from '../../../components/UI/Preloader';
 import Button from '../../UI/Button';
 import {getApiResource, pushFormData} from '../../../utils/network';
+import {checkValidInputGroup} from '../../../services/validation/validation';
 import {RFC2822_EMAIL_VALIDATION,
         VALID_MESSAGES, 
         PHONE_VALIDATION} from '../../../constants/validation';
@@ -31,7 +32,6 @@ const Form = () => {
                                     minLength: 2, 
                                     maxLength: 60
                                 },
-                                setIsFormValid
                         );
     const email = useInput('', 'email', 
                             {
@@ -40,14 +40,12 @@ const Form = () => {
                                 maxLength: 100,
                                 pattern: RFC2822_EMAIL_VALIDATION,
                             },
-                            setIsFormValid
                         );
     const phone = useInput('', 'phone', 
                                 {
                                     isEmpty: false, 
                                     pattern: PHONE_VALIDATION,
                                 },
-                                setIsFormValid
                             );
     const file = useInput(null, 'file',
                                 {
@@ -56,30 +54,24 @@ const Form = () => {
                                     fileType: ['image/jpg', 'image/jpeg'],
                                     fileSize: 5242880 // 1048576, value in bytes
                                 },
-                                setIsFormValid
     );
     console.log('file obj', file);
     console.log('isFormValid', isFormValid);
-    // console.log('isSuccess', isSuccess);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // submitting form data for user registration
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
-        // console.log('data', data);
         setResponse(data);
         setModalActive(true);
     };
     useEffect(() => {
-        const formValid = [name.state.inputValid,email.state.inputValid,
+        const inputsValid = [name.state.inputValid,email.state.inputValid,
                             phone.state.inputValid,file.state.inputValid]
-        if(formValid.includes(false)) {
-            setIsFormValid(false);
-        } else {
-            setIsFormValid(true);
-        }
+        setIsFormValid(checkValidInputGroup(inputsValid));                   
     },[name.state.inputValid,email.state.inputValid,phone.state.inputValid,file.state.inputValid]);  
     useEffect(() => {
+        // getting data to display position
         (async () => {
             const data = await getApiResource(API_POSITIONS_PATH);
             // check for Error
@@ -93,7 +85,6 @@ const Form = () => {
             }
         })();
     }, []);
-    // + ' ' + styles.form__preloader_absolute
     return (
         <div className={styles.form}>
             <div className={styles.form__modal}>
@@ -104,109 +95,116 @@ const Form = () => {
                     {response && <Response response={response}/>}
                 </Modal>
             </div>
-            <form id="form" className={styles.form__container} onSubmit={handleSubmit}>
-                <div className={styles.form__inputs}>
-                    <div className={styles.form__helper}>
-                        <InputHelper
-                            helper = {name}
-                            messages = {VALID_MESSAGES} 
-                        > 
-                            <input
-                                id="name" 
-                                className={styles.form__input}
-                                type="text" 
-                                aria-label="user name"
-                                name="name"
-                                placeholder="Your name"
-                                required
-                                value={name.values.value}
-                                onChange={(e) => name.handlers.onChange(e)}
-                                onBlur={(e) => name.handlers.onBlur(e)}
-                                onFocus={(e) => name.handlers.onFocus(e)}
-                            />
-                        
-                        </InputHelper>
+            <form id="form" className={styles.form} onSubmit={handleSubmit}>
+                <div className={styles.form__container}>
+                    <div className={styles.form__inputs}>
+                        <div className={styles.form__helper}>
+                            <InputHelper
+                                helper = {name}
+                                messages = {VALID_MESSAGES} 
+                            > 
+                                <input
+                                    id="name" 
+                                    className={styles.form__input}
+                                    type="text" 
+                                    aria-label="user name"
+                                    name="name"
+                                    placeholder="Your name"
+                                    required
+                                    value={name.values.value}
+                                    onChange={(e) => name.handlers.onChange(e)}
+                                    onBlur={(e) => name.handlers.onBlur(e)}
+                                    onFocus={(e) => name.handlers.onFocus(e)}
+                                />
+                            
+                            </InputHelper>
+                        </div>
+                        <div className={styles.form__helper}>   
+                            <InputHelper
+                                helper = {email}
+                                messages = {VALID_MESSAGES} 
+                            > 
+                                <input
+                                    id="email" 
+                                    className={styles.form__input}
+                                    type="email" 
+                                    aria-label="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required
+                                    value={email.values.value}
+                                    onChange={(e) => email.handlers.onChange(e)}
+                                    onBlur={(e) => email.handlers.onBlur(e)}
+                                    onFocus={(e) => email.handlers.onFocus(e)}
+                                />
+                            </InputHelper>
+                        </div>
+                        <div className={styles.form__helper}>   
+                            <InputHelper
+                                helper = {phone}
+                                messages = {VALID_MESSAGES} 
+                            > 
+                                <input
+                                    id="phone"
+                                    className={styles.form__input} 
+                                    type="tel" 
+                                    aria-label="phone number"
+                                    name="phone"
+                                    placeholder="Phone"
+                                    required
+                                    value={phone.values.value}
+                                    onChange={(e) => phone.handlers.onChange(e)}
+                                    onBlur={(e) => phone.handlers.onBlur(e)}
+                                    onFocus={(e) => phone.handlers.onFocus(e)}
+                                />
+                            </InputHelper>
+                        </div>
                     </div>
-                    <div className={styles.form__helper}>   
-                        <InputHelper
-                            helper = {email}
-                            messages = {VALID_MESSAGES} 
-                        > 
-                            <input
-                                id="email" 
-                                className={styles.form__input}
-                                type="email" 
-                                aria-label="email"
-                                name="email"
-                                placeholder="Email"
-                                required
-                                value={email.values.value}
-                                onChange={(e) => email.handlers.onChange(e)}
-                                onBlur={(e) => email.handlers.onBlur(e)}
-                                onFocus={(e) => email.handlers.onFocus(e)}
-                            />
-                        </InputHelper>
+                    <div className={styles.form__position}>
+                        <div className={styles[`form__position-title`]}>
+                            Select your position
+                        </div>
+                        {
+                            isPending && 
+                                <div className={styles.form__preloader}>
+                                    <Preloader/>
+                                </div>                        
+                        }
+                        {
+                            error &&
+                                <div className={styles.form__error}>
+                                    <ErrorMessage error={error}/>
+                                </div>
+                        }
+                        {
+                            positions && 
+                                <Position positions={positions}/>
+                        }
                     </div>
-                    <div className={styles.form__helper}>   
-                        <InputHelper
-                            helper = {phone}
-                            messages = {VALID_MESSAGES} 
-                        > 
-                            <input
-                                id="phone"
-                                className={styles.form__input} 
-                                type="tel" 
-                                aria-label="phone number"
-                                name="phone"
-                                placeholder="Phone"
-                                required
-                                value={phone.values.value}
-                                onChange={(e) => phone.handlers.onChange(e)}
-                                onBlur={(e) => phone.handlers.onBlur(e)}
-                                onFocus={(e) => phone.handlers.onFocus(e)}
-                            />
-                        </InputHelper>
+                    <div className={styles.form__file}>
+                        {/* <div className="form__input"> */}
+                            <InputHelper
+                                helper={file}
+                                messages={VALID_MESSAGES} 
+                            >
+                                <label className={styles[`form__photo-label`]}>
+                                    Upload
+                                    <input 
+                                        className={styles.form__photo}
+                                        id='file'
+                                        type="file"
+                                        name="photo"
+                                        accept=".jpg, .jpeg" 
+                                        required
+                                        onChange={(e) => file.handlers.onChangeFile(e)}
+                                    />
+                                </label>    
+                            </InputHelper>
+                        {/* </div> */}
                     </div>
-                </div>
-                <div className="form__positions">
-                    <div className={styles[`form__position-title`]}>
-                        Select your position
+                    <div className="form__btn">
+                        <Button isDisabled={isFormValid}/>
                     </div>
-                    {
-                        isPending && 
-                            <div className={styles.form__preloader}>
-                                <Preloader/>
-                            </div>                        
-                    }
-                    {
-                        error &&
-                            <div className={styles.form__error}>
-                                <ErrorMessage error={error}/>
-                            </div>
-                    }
-                    {
-                        positions && 
-                            <Position positions={positions}/>
-                    }
-                </div>
-                <div className="form__file">
-                    <div className="form__input">
-                        <InputHelper 
-                            helper={file}
-                            messages={VALID_MESSAGES} 
-                        />
-                        <input 
-                            className="form__photo"
-                            type="file"
-                            name="photo"
-                            accept=".jpg, .jpeg" 
-                            required
-                            onChange={(e) => file.handlers.onChangeFile(e)}
-                        />
-                    </div>
-                </div>
-                <div className="form__btn">
-                    <Button isDisabled={isFormValid}/>
                 </div>
             </form>
         </div>

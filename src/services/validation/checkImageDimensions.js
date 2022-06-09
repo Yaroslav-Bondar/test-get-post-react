@@ -2,7 +2,7 @@
  * checking the image dimensions according to the passed parameters
  * @param {object} options - check options
  * @param {object} options - an object containing information about the file
- * @returns {bool} - error status
+ * @returns {Promise} -  error status
  */
 export async function checkImageDimensions(options, value) {
     // potential for error when validations.fileType is not defined

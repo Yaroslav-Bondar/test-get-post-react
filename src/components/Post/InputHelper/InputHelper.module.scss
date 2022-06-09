@@ -1,8 +1,10 @@
 @import '../../../styles/_config/variables';
+@import '../../../styles/_mixins/alignment';
 
 .helper {
     position: relative;
-    border: 1px solid $color-alto;
+    border: $border-input-alto;
+    // border: 1px solid $color-alto;
     border-radius: 4px;
     &_error {
         border-color: $color-mahogany;
@@ -35,5 +37,28 @@
         &_error {
             color: $color-mahogany;
         } 
+    }
+}
+.file {
+    @include flex-center-v;
+        height: 54px;
+
+    &__btn {
+        width: 83px;
+        height: inherit;
+        border: $border-input-dark;
+        border-radius: 4px 0 0 4px;
+    }
+    &__preview {
+        @include flex-center-v;
+        height: inherit;
+        flex-grow: 1;
+        border: $border-input-alto;
+        border-radius: 0 4px 4px 0px;
+        border-left-width: 0;
+        &-text {
+            margin-left: 16px;
+            color: $color-gray;
+        }
     }
 }

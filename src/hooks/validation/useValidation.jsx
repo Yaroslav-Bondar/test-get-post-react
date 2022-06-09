@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {checkInputValid} from '../../services/validation/validation'; 
 import {checkImageDimensions} from '../../services/validation/checkImageDimensions';
 
-const useValidation = (value, fileValue, validations) => {
+const useValidation = (value, validations) => {
     // errors for a specific input field
     const [inputErrors, setInputErrors] = useState(null);
     // is input field valid 
@@ -10,78 +10,49 @@ const useValidation = (value, fileValue, validations) => {
 
     useEffect(() => {
         const errors = {};
+        // input validation
         (async () => {
             for (const validation in validations) {
                 switch (validation) {
                     case 'minLength':
-                        if(value.length < validations[validation]) {
-                            errors.minLengthError = true;
-                        } else {
-                            errors.minLengthError = false;
-                        }
+                        errors.minLengthError = value.length < validations[validation];
                         break;
                     case 'isEmpty':
-                        if(value) {
-                            errors.isEmptyError = false;
-                        } else {
-                            errors.isEmptyError = true;
-                        }
+                        errors.isEmptyError = value.length === 0; 
                         break;
                     case 'maxLength':
-                        if(value.length > validations[validation]) {
-                            errors.maxLengthError = true;
-                        } else {
-                            errors.maxLengthError = false;
-                        }
+                        errors.maxLengthError = value.length > validations[validation]
                         break;
                     case 'pattern':
-                        if(validations[validation].test(value.toLowerCase())) {
-                            errors.patternError = false;
-                        } else {
-                            errors.patternError = true;
-                        }
+                        errors.patternError = !validations[validation].test(value.toLowerCase()); 
                         break;
                     case 'isFileEmpty': 
-                        if(fileValue) {
+                        if(value) {
                             errors.isFileEmptyError = false;
                         } else {
                             errors.isFileEmptyError = true;
                         }
                         break;    
                     case 'imageDimensions':
-                        if(!fileValue) {
+                        if(!value) {
                             errors.imageDimensionsError = false;
                             break;
                         } 
-                        const isImageDimensions = await checkImageDimensions(validations, fileValue);
-                        if(isImageDimensions) {
-                            errors.imageDimensionsError = true;
-                        } else {
-                            errors.imageDimensionsError = false;
-                        }
+                        errors.imageDimensionsError = await checkImageDimensions(validations, value);
                         break;
                     case 'fileType': 
-                        if(!fileValue) {
+                        if(!value) {
                             errors.fileTypeError = false;               
                             break;
                         }
-                        const isType = validations[validation].includes(fileValue.type);  
-                        if(isType) {
-                            errors.fileTypeError = false;               
-                        } else {
-                            errors.fileTypeError = true;
-                        }
+                        errors.fileTypeError = !validations[validation].includes(value.type); 
                         break;
                     case 'fileSize':
-                        if(!fileValue) {
+                        if(!value) {
                             errors.fileSizeError = false;
                             break;
                         }
-                        if(fileValue.size > validations[validation]) {
-                            errors.fileSizeError = true;
-                        } else {
-                            errors.fileSizeError = false;
-                        }
+                        errors.fileSizeError = value.size > validations[validation];
                         break;
                 }
             }
@@ -90,7 +61,7 @@ const useValidation = (value, fileValue, validations) => {
             // set validation status for input
             setInputValid(checkInputValid(errors)); 
         })();
-    }, [value, fileValue]);
+    }, [value]);
 
     return {
         errors: {...inputErrors},

@@ -3,10 +3,10 @@
 @import '_config/normalize';
 
 // config mixins
-@import '_mixins/media';
-@import '_mixins/container';
 @import '_mixins/alignment';
+@import '_mixins/container';
 @import '_mixins/font-face';
+@import '_mixins/media';
 
 // settings
 @import "_config/variables";
@@ -20,7 +20,6 @@
 @import 'blocks/img';
 @import 'blocks/title';
 @import 'blocks/btn';
-@import 'blocks/hover-btn';
 
 html, body {
     font-family: $font-family-base;

@@ -3,9 +3,12 @@
 .link {
     @include flex-center;
     text-decoration: none;
-    // color: $color-black;
-    color: $font-color-base;
+    color: $color-dark;
     &_color_yellow {
         background-color: $color-primary;
     }
+    &_hover:hover {
+        background-color: $color-turbo;
+        transition: .2s background-color;
+    }  
 }

@@ -18,6 +18,7 @@ const InputHelper = ({helper, messages, children}) => {
     const [isLabel, setIsLabel] = useState(false);
     const [labelMessage, setLabelMessage] = useState('');
     
+    const [fileName, setFileName] = useState(null);
     /**
      * set error message from messages object
      * by the name of the error sets the corresponding messages
@@ -30,14 +31,32 @@ const InputHelper = ({helper, messages, children}) => {
             }
         } 
     }
+
+    // const helperId = helper.id;
+    // if(helper.id === 'file') {
+    //     // rendering condition
+    //     const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
+    //     // const fileName = ;
+    //     // set error state
+    //     setIsError(error);
+    //     // set error message
+    //     getErrorMessage();
+    //     setFileName(helper.values.fileName);
+    //     // setFileName(helper.values.fileName);
+    // } else {
+
+
     useEffect(() => {
         if(helper.id === 'file') {
             // rendering condition
             const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
+            // const fileName = ;
             // set error state
             setIsError(error);
             // set error message
             getErrorMessage();
+            setFileName(helper.values.fileName);
+            // setFileName(helper.values.fileName);
         } else {
             // rendering condition
             const error = !helper.errors.isEmptyError && !helper.state.inputValid; 
@@ -59,20 +78,37 @@ const InputHelper = ({helper, messages, children}) => {
         <>
             { helper.id === 'file' && 
                 <div className={styles.file}>
-                    <div className={styles.file__btn}>
+                    <div className={!isError ? 
+                                        styles.file__btn + ' ' + styles.file__btn_border_normal:
+                                        styles.file__btn + ' ' + styles.file__btn_border_error
+                                    }
+                    >
                         {children}
                     </div>
-                    <div className={styles.file__preview}>
-                        <span className={styles[`file__preview-text`]}>
-                            Upload your photo
+                    <div className={!isError ? 
+                                        styles.file__preview + ' ' + styles.file__preview_border_normal:
+                                        styles.file__preview + ' ' + styles.file__preview_border_error
+                                    }
+                    >
+                        <span className={fileName ? 
+                                            styles.file__label + ' ' + styles.file__label_color_dark :
+                                            styles.file__label + ' ' + styles.file__label_color_gray 
+                                        }
+                        >
+                            {fileName ? fileName : 'Upload your photo'}
                         </span>
                     </div>
+                    {isError && 
+                        <div className={styles.helper__error}>
+                            {errorMessage}
+                        </div>
+                    }
                 </div>
             }
             { helper.id !== 'file' &&
-                <div className={!isError ? 
-                                    styles.helper : 
-                                    styles.helper + ' ' + styles.helper_error
+                <div className={!isError ?
+                                    styles.helper + ' ' + styles.helper_border_normal: 
+                                    styles.helper + ' ' + styles.helper_border_error 
                                 }
                 >
                     {isError && 
@@ -85,15 +121,14 @@ const InputHelper = ({helper, messages, children}) => {
                         </div>} 
                     {isLabel &&  
                         <div className={!isError ? 
-                                            styles.helper__label : 
-                                            styles.helper__label + ' ' + styles.helper__label_error
+                                            styles.helper__label + ' ' + styles.helper__label_color_normal: 
+                                            styles.helper__label + ' ' + styles.helper__label_color_error
                                         }
                         > 
                             {labelMessage}
                         </div>}
                     {children}  
                 </div>
-
             }        
         </>    
     );

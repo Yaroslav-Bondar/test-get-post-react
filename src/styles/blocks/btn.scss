@@ -4,6 +4,10 @@
     border: none;
     &_color_yellow {
         background-color: $color-primary;
+    }
+    &_hover:hover {
+        background-color: $color-turbo;
+        transition: .2s background-color;
     }  
 } 
 

@@ -13,9 +13,9 @@ const Position = ({positions}) => {
                             className={styles.position__radio} 
                             name='position_id' 
                             value={id}
-                            checked={index === 0}
+                            defaultChecked={index === 0}
                         />
-                        <label for={id} className={styles.position__job}>
+                        <label htmlFor={id} className={styles.position__job}>
                             {name}
                         </label>
                     </li>

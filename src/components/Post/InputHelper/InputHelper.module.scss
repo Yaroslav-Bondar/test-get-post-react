@@ -1,13 +1,15 @@
 @import '../../../styles/_config/variables';
+@import '../../../styles/_config/include-fonts';
 @import '../../../styles/_mixins/alignment';
 
 .helper {
     position: relative;
-    border: $border-input-alto;
-    // border: 1px solid $color-alto;
     border-radius: 4px;
-    &_error {
-        border-color: $color-mahogany;
+    &_border_normal {
+        border: $border-input-alto;
+    }
+    &_border_error {
+        border: $border-input-error;
     }
     &__error,
     &__tip,
@@ -15,7 +17,7 @@
         position: absolute;
         font-size: 12px;
         line-height: 14px;
-        color: $color-gray;
+        // color: $color-gray;
     }
     &__label,
     &__tip,
@@ -23,42 +25,64 @@
         left: 16px;
     }
     &__error {
+        bottom: -17px;
         color: $color-mahogany;
     }
-    &__tip,
-    &__error {
+    &__tip {
+        color: $color-gray;
         bottom: -16px;
-        
     }
     &__label {
         padding: 0 4px;
-        top: -8px;
+        top: -13px;
+        @include font-nunito-medium;
         background-color: $color-background;
-        &_error {
+        &_color_normal {
+            color: $color-gray;
+        }
+        &_color_error {
             color: $color-mahogany;
         } 
     }
 }
 .file {
+    position: relative;
     @include flex-center-v;
-        height: 54px;
+    height: 54px;
 
     &__btn {
         width: 83px;
         height: inherit;
-        border: $border-input-dark;
         border-radius: 4px 0 0 4px;
+        &_border_normal {
+            border: $border-input-dark;
+        }
+        &_border_error {
+            border: $border-input-error;
+        }
     }
     &__preview {
         @include flex-center-v;
         height: inherit;
         flex-grow: 1;
-        border: $border-input-alto;
         border-radius: 0 4px 4px 0px;
-        border-left-width: 0;
-        &-text {
-            margin-left: 16px;
+        &_border_normal {
+            border: $border-input-alto;
+            border-left-width: 0;
+        }
+        &_border_error {
+            border: $border-input-error;
+            border-left-width: 0;
+        }
+    }
+    &__label {
+        margin-left: 16px;
+        &_color_dark {
+            color: $color-dark;
+        }
+        &_color_gray {
             color: $color-gray;
         }
+ 
     }
 }

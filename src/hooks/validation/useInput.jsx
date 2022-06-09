@@ -4,29 +4,23 @@ import {useValidation} from './useValidation';
 const useInput = (initialValue, id, validations) => {
     const [value, setValue] = useState(initialValue);
     // exit state of the input
-    // const [isDirty, setDirty] = useState(false);
     const [isFocus, setIsFocus] = useState(false);
-    const [fileValue, setFileValue] = useState(initialValue);
     const [fileName, setFileName] = useState('');
     // input validation
-    const valid = useValidation(value, fileValue, validations);
+    const valid = useValidation(value, validations);
     console.log('valid', valid); 
-    
     //handlers
     const onChange = (e) => {
         setValue(e.target.value);
     }
-    
     const onChangeFile = (e) => {
         const file = e.target.files[0]; 
-        setFileValue(file);
+        setValue(file);
         setFileName(file.name);
     }
-    
     const onBlur = (e) => {
         setIsFocus(false);
     }
-
     const onFocus = (e) => {
         setIsFocus(true);
     }
@@ -40,11 +34,10 @@ const useInput = (initialValue, id, validations) => {
             onFocus,
         },
         values: {
-            // value, //* is it necessary ?
+            value, 
             fileName,
         },
         state: {
-            // isDirty,
             isFocus,
             ...valid.state,
         },

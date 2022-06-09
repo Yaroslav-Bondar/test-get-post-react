@@ -30,7 +30,7 @@ const Form = () => {
                                 {
                                     isEmpty: false, 
                                     minLength: 2, 
-                                    maxLength: 60
+                                    maxLength: 60 
                                 },
                         );
     const email = useInput('', 'email', 
@@ -52,10 +52,12 @@ const Form = () => {
                                     isFileEmpty: false,
                                     imageDimensions: {height: 70, width: 70, check: 'min'}, // value in pixels
                                     fileType: ['image/jpg', 'image/jpeg'],
-                                    fileSize: 5242880 // 1048576, value in bytes
+                                    fileSize: 5242880  // 1048576, value in bytes
                                 },
     );
     console.log('file obj', file);
+    console.log('name obj', name);
+    console.log('phone obj', phone);
     console.log('isFormValid', isFormValid);
 
     const handleSubmit = async (e) => {
@@ -182,27 +184,25 @@ const Form = () => {
                         }
                     </div>
                     <div className={styles.form__file}>
-                        {/* <div className="form__input"> */}
-                            <InputHelper
-                                helper={file}
-                                messages={VALID_MESSAGES} 
-                            >
-                                <label className={styles[`form__photo-label`]}>
-                                    Upload
-                                    <input 
-                                        className={styles.form__photo}
-                                        id='file'
-                                        type="file"
-                                        name="photo"
-                                        accept=".jpg, .jpeg" 
-                                        required
-                                        onChange={(e) => file.handlers.onChangeFile(e)}
-                                    />
-                                </label>    
-                            </InputHelper>
-                        {/* </div> */}
+                        <InputHelper
+                            helper={file}
+                            messages={VALID_MESSAGES} 
+                        >
+                            <label className={styles[`form__photo-label`]}>
+                                Upload
+                                <input 
+                                    className={styles.form__photo}
+                                    id='file'
+                                    type="file"
+                                    name="photo"
+                                    accept=".jpg, .jpeg" 
+                                    required
+                                    onChange={(e) => file.handlers.onChangeFile(e)}
+                                />
+                            </label>    
+                        </InputHelper>
                     </div>
-                    <div className="form__btn">
+                    <div className={styles.form__btn}>
                         <Button isDisabled={isFormValid}/>
                     </div>
                 </div>

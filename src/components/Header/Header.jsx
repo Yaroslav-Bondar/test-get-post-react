@@ -13,10 +13,10 @@ const Header = () => {
                     </div>
                 </div>
                 <nav className={styles.header__links}>
-                    <AnchorLink href='#get' className={styles.header__link + ` hover-btn link link_color_yellow`}>
+                    <AnchorLink href='#get' className={styles.header__link + ` link link_hover link_color_yellow`}>
                         Users
                     </AnchorLink>
-                    <AnchorLink href='#post' className={styles.header__link + ` hover-btn link link_color_yellow`}>
+                    <AnchorLink href='#post' className={styles.header__link + ` link link_hover link_color_yellow`}>
                         Sign up
                     </AnchorLink>
                 </nav>

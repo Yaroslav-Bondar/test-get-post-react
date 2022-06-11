@@ -8,8 +8,8 @@ import Post from '../Post';
 // import '../../styles/main.scss';
 
 function App() {
+  // successful registration status
   const [reset, setReset] = useState(false);
-  console.log('reset App', reset);
   
   return (
     <div className="_wrapper">

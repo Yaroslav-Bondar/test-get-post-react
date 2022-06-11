@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ErrorMessage from '../../ErrorMessage';
 import Modal from '../../Modal';
 import InputHelper from '../InputHelper';
@@ -79,10 +79,12 @@ const Form = ({setReset}) => {
             setIsCover(false);
         } else {
             setResponse(data);
+            // display a message about successful registration
             setModalActive(true);
             setIsPending(false);
             setIsCover(false);
-            // update the list of users in the “Working with a GET request"
+            // start updating the list of users 
+            // in the "Working with a GET request" block after successful registration
             setReset(true);
         }
     };
@@ -118,12 +120,6 @@ const Form = ({setReset}) => {
             </div>
             <form id="form" className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.form__container}>
-                    {/* {
-                        isPending && 
-                            <div className={styles.form__preloader}>
-                                <Preloader/>
-                            </div>                        
-                    } */}
                     <div className={styles.form__inputs}>
                         <div className={styles.form__helper}>
                             <InputHelper
@@ -240,7 +236,7 @@ const Form = ({setReset}) => {
     );
 }
 
-// Form.propTypes = {
-//     setErrorApi: PropTypes.func,
-// }
+Form.propTypes = {
+    setReset: PropTypes.func,
+}
 export default Form;

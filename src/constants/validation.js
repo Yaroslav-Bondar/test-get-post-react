@@ -11,7 +11,7 @@ const HELPER_MESSAGES = {
         label: 'Email',
     },
     phone: {
-        helper: 'Should start with code of Ukraine +380',
+        helper: 'Should start with code of Ukraine +380XXXXXXXXX',
         label: 'Phone number',
     }
 }

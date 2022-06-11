@@ -8,7 +8,7 @@ const Card = ({users}) => {
                 <li className={styles.card__item} key={id}>
                     <div className={styles.card__avatar}>
                         <img 
-                            className={styles.card__img + ` img`} 
+                            className={styles.card__img + ` img img_contain`} 
                             src={photo} 
                             alt='User Avatar'
                         />

@@ -27,14 +27,12 @@
         outline: none;
     }
     &__position {
-        margin: 43px 0 50px 0;
+        margin: 38px 0 46px 0;
         &-title {
-            margin-bottom: 11px;  
+            margin-bottom: 10px;   
         }
     }
     &__preloader {
-        // display: flex;
-        // justify-content: center;
         @include flex-center;
         padding: $spacing-small 0;
         &_cover {

@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import Preloader from '../../components/UI/Preloader';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -14,13 +14,11 @@ const Get = ({reset, setReset}) => {
     const [nextPage, setNextPage] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
-    // const [isReset, setIsReset] = useState(reset);
-    console.log('reset Get', reset);
     
     const getResource = async (url) => {
         const data = await getApiResource(url);
         if(data instanceof Error) {
-            // set error message (since data == Error)
+            // set error message (since data === Error)
             setError(data);
             setIsPending(false);
         } else {
@@ -34,21 +32,22 @@ const Get = ({reset, setReset}) => {
                     phone,
                 }
             });
-                setNextPage(data.links.next_url);
+            setNextPage(data.links.next_url);
             // adding users to otput
-            if(reset) {
-                setUsers(usersList);   
-            } else {
-                setUsers(prevState => {
-                    if(!prevState) prevState = [];
-                    // console.log('prevState', prevState);
-                    if(prevState.length) {
-                        if(prevState[0].id === usersList[0].id) prevState = [];     
-                    }
-                    // if(prevState === usersList) prevState = [];
-                    return [...prevState, ...usersList]
-                });
-            }
+            setUsers(prevState => {
+                // if initial state or successful registration
+                if(!prevState || reset) prevState = [];
+                if(prevState.length) {
+                    // checking for data duplication when rerendering 
+                    // a component after successful registration as a result of setReset(false)
+                    if(prevState[0].id === usersList[0].id) 
+                        return prevState;
+                }
+                // if there was no successful registration (reset === false) 
+                // and prevState is not empty - (work of the show more button)
+                return [...prevState, ...usersList]
+            });
+            // reset successful registration status
             if(reset) setReset(false);
             setIsPending(false);
             setError(null);
@@ -56,12 +55,6 @@ const Get = ({reset, setReset}) => {
     }
     useEffect(() => {
         getResource(API_USERS_PATH + API_USERS_PARAMS);
-        // if(reset) {
-        //     setReset(false);
-        //     setUsers(null);
-        // }
-        console.log('useEffect reset', reset);
-        // return () => setReset(false)
     }, [reset]);
     return (
         <>
@@ -105,8 +98,9 @@ const Get = ({reset, setReset}) => {
     );
 }
 
-// Get.propTypes = {
-//     text: PropTypes.
-// }
-// console.log('Get', Get);
+Get.propTypes = {
+    reset: PropTypes.bool,
+    setReset: PropTypes.func,
+}
+
 export default Get;

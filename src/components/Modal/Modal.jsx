@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styles from './Modal.module.scss';
 
 const Modal = ({active, setModalActive, children}) => {
-    console.log('children', children);
     const closeHandler = () => {
         setModalActive(false);
     }

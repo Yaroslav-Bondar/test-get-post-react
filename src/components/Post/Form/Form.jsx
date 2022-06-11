@@ -18,13 +18,14 @@ import {API_USERS_PATH,
         API_TOKEN_PATH} from '../../../constants/api';
 import styles from './Form.module.scss';
 
-const Form = () => {
+const Form = ({setReset}) => {
     const [positions, setPositions] = useState(null);
     const [isFormValid, setIsFormValid] = useState(false);
     const [response, setResponse] = useState(null);
     const [modalActive, setModalActive] = useState(false);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
+    const [isCover, setIsCover] = useState(false);
 
     const name = useInput('', 'name', 
                                 {
@@ -62,10 +63,28 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // start preloader
+        setIsPending(true);
+        // display preloader in position: absolute;
+        setIsCover(true);
         // submitting form data for user registration
         const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
-        setResponse(data);
-        setModalActive(true);
+         // check for Error
+         if(data instanceof Error) {
+            // setError(data);
+            setResponse(data);
+            setModalActive(true);
+            // stop preloader
+            setIsPending(false);
+            setIsCover(false);
+        } else {
+            setResponse(data);
+            setModalActive(true);
+            setIsPending(false);
+            setIsCover(false);
+            // update the list of users in the “Working with a GET request"
+            setReset(true);
+        }
     };
     useEffect(() => {
         const inputsValid = [name.state.inputValid,email.state.inputValid,
@@ -99,6 +118,12 @@ const Form = () => {
             </div>
             <form id="form" className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.form__container}>
+                    {/* {
+                        isPending && 
+                            <div className={styles.form__preloader}>
+                                <Preloader/>
+                            </div>                        
+                    } */}
                     <div className={styles.form__inputs}>
                         <div className={styles.form__helper}>
                             <InputHelper
@@ -168,9 +193,13 @@ const Form = () => {
                         </div>
                         {
                             isPending && 
-                                <div className={styles.form__preloader}>
-                                    <Preloader/>
-                                </div>                        
+                                    <div className={isCover ?
+                                                        styles.form__preloader + ' ' + styles.form__preloader_cover :
+                                                        styles.form__preloader 
+                                                    }
+                                    >
+                                        <Preloader/>
+                                    </div>                        
                         }
                         {
                             error &&

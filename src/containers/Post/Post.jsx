@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import Form from '../../components/Post/Form';
 import styles from './Post.module.scss';
 
-const Post = () => {
+const Post = ({setReset}) => {
     return (
         <section className={styles.post}>
             <div id='post' className={styles.post__container + ` _container`}>
@@ -11,7 +11,7 @@ const Post = () => {
                     Working with GET request
                 </h2>
                 <div className={styles.post__form}>
-                    <Form/>
+                    <Form setReset={setReset}/>
                 </div>
             </div>    
         </section>

@@ -31,32 +31,15 @@ const InputHelper = ({helper, messages, children}) => {
             }
         } 
     }
-
-    // const helperId = helper.id;
-    // if(helper.id === 'file') {
-    //     // rendering condition
-    //     const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
-    //     // const fileName = ;
-    //     // set error state
-    //     setIsError(error);
-    //     // set error message
-    //     getErrorMessage();
-    //     setFileName(helper.values.fileName);
-    //     // setFileName(helper.values.fileName);
-    // } else {
-
-
     useEffect(() => {
         if(helper.id === 'file') {
             // rendering condition
             const error = !helper.errors.isFileEmptyError && !helper.state.inputValid;
-            // const fileName = ;
             // set error state
             setIsError(error);
             // set error message
             getErrorMessage();
             setFileName(helper.values.fileName);
-            // setFileName(helper.values.fileName);
         } else {
             // rendering condition
             const error = !helper.errors.isEmptyError && !helper.state.inputValid; 

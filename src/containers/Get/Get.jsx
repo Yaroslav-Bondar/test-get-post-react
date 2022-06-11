@@ -9,11 +9,14 @@ import {API_USERS_PATH,
         API_USERS_PARAMS} from '../../constants/api'
 import styles from './Get.module.scss';
 
-const Get = () => {
+const Get = ({reset, setReset}) => {
     const [users, setUsers] = useState(null);
     const [nextPage, setNextPage] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
+    // const [isReset, setIsReset] = useState(reset);
+    console.log('reset Get', reset);
+    
     const getResource = async (url) => {
         const data = await getApiResource(url);
         if(data instanceof Error) {
@@ -30,20 +33,36 @@ const Get = () => {
                     email,
                     phone,
                 }
-            }); 
-            setNextPage(data.links.next_url);
-            // adding users to otput
-            setUsers(prevState => {
-                if(!prevState) prevState = [];
-                return [...prevState, ...usersList]
             });
+                setNextPage(data.links.next_url);
+            // adding users to otput
+            if(reset) {
+                setUsers(usersList);   
+            } else {
+                setUsers(prevState => {
+                    if(!prevState) prevState = [];
+                    // console.log('prevState', prevState);
+                    if(prevState.length) {
+                        if(prevState[0].id === usersList[0].id) prevState = [];     
+                    }
+                    // if(prevState === usersList) prevState = [];
+                    return [...prevState, ...usersList]
+                });
+            }
+            if(reset) setReset(false);
             setIsPending(false);
             setError(null);
         }
     }
     useEffect(() => {
         getResource(API_USERS_PATH + API_USERS_PARAMS);
-    }, []);
+        // if(reset) {
+        //     setReset(false);
+        //     setUsers(null);
+        // }
+        console.log('useEffect reset', reset);
+        // return () => setReset(false)
+    }, [reset]);
     return (
         <>
             <section className={styles.get}>

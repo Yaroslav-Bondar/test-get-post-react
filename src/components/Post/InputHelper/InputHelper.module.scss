@@ -17,7 +17,6 @@
         position: absolute;
         font-size: 12px;
         line-height: 14px;
-        // color: $color-gray;
     }
     &__label,
     &__tip,
@@ -49,7 +48,6 @@
     position: relative;
     @include flex-center-v;
     height: 54px;
-
     &__btn {
         width: 83px;
         height: inherit;

@@ -4,11 +4,22 @@
 .banner {
     &__container {
         height: 650px;
+        @media screen and (max-width:(map-get($breakpoints, 'lg'))) {
+            background: center/cover no-repeat url('../../../public/img/bg/header-bg.svg');
+        }
+        @media screen and (max-width:(map-get($breakpoints, 'md'))) {
+            height: 500px;
+        }
     }
     &__article {
         @include flex-center;
         height: 100%;
-        background: center/cover no-repeat url('../../../public/img/bg/header-bg.svg');
+        @media screen and (min-width:(map-get($breakpoints, 'lg'))) {
+            background: center/cover no-repeat url('../../../public/img/bg/header-bg.svg');
+        }
+        @media screen and (max-width: map-get($breakpoints, 'sm')) {
+            align-items: start;
+        }
     }
     &__wrap {
         width: 380px;
@@ -16,6 +27,9 @@
     }
     &__title {
         margin-bottom: 21px;
+        @media screen and (max-width: map-get($breakpoints, 'sm')) {
+            margin-top: 40px;
+        }
     }
     &__text {
         margin-bottom: 32px;

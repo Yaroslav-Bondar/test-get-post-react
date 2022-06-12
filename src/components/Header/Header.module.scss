@@ -7,6 +7,15 @@
         @include flex-center-v;
         justify-content: space-between;
         height: 60px;
+        @media screen and (max-width:(map-get($breakpoints, 'lg'))) {
+            padding: 0 60px;
+        }
+        @media screen and (max-width:(map-get($breakpoints, 'md'))) {
+            padding: 0 32px;
+        }
+        @media screen and (max-width: 570px) {
+            padding: 0 16px;
+        }
     }
     &__links {
         display: flex;

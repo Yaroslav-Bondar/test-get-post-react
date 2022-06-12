@@ -6,6 +6,19 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 29px;
         margin-bottom: 50px;
+        @media screen and (max-width: 938px) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media screen and (max-width: map-get($breakpoints, 'md')) {
+            grid-gap: 16px;
+        }
+        @media screen and (max-width: 478px) {
+            grid-template-columns: 1fr;
+            grid-gap: 16px 0;
+        }
+        @media screen and (max-width: map-get($breakpoints, 'sm')) {
+            grid-gap: 20px 0;
+        }
     }
     &__item {
         padding: 20px;

@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
-// import '../../styles/blocks/logo.scss';
 import styles from './Header.module.scss';
 
 const Header = () => {
@@ -24,9 +22,5 @@ const Header = () => {
         </header>
     );
 }
-
-// Header.propTypes = {
-//     text: PropTypes.
-// }
 
 export default Header;

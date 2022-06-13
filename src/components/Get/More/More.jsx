@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styles from './More.module.scss';
 
 const More = ({nextPage, getResource, setIsPending, setError}) => {
-    // console.log('More', typeof nextPage);
     const handleChangeMore = () => {
         setError(null);
         setIsPending(true);
@@ -21,6 +20,8 @@ const More = ({nextPage, getResource, setIsPending, setError}) => {
 More.propTypes = {
     nextPage: PropTypes.string,
     getResource: PropTypes.func,
+    setIsPending: PropTypes.func,
+    setError: PropTypes.func,
 }
 
 export default More;

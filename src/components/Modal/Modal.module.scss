@@ -28,6 +28,9 @@
         &_active {
             transform: scale(1);
         }
+        @media screen and (max-width: map-get($breakpoints, 'md')) {
+            width: 80vw;
+        }
     }
     &__close {
         position: absolute;

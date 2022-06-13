@@ -6,13 +6,11 @@
 @import '_mixins/alignment';
 @import '_mixins/container';
 @import '_mixins/font-face';
-@import '_mixins/media';
 
 // settings
 @import "_config/variables";
 @import '_config/connect-fonts';
 @import '_config/include-fonts';
-
 
 // blocks
 @import 'blocks/logo';
@@ -33,6 +31,7 @@ html, body {
 ._container {
     @include container;
 }
+
 ._wrapper {
     @include wrapper;
     background-color: $color-background;

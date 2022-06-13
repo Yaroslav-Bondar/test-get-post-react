@@ -1,7 +1,5 @@
 
-// import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-
 import styles from './Banner.module.scss';
 
 const Banner = () => {

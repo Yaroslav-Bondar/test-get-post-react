@@ -6,7 +6,7 @@ import InputHelper from '../InputHelper';
 import Position from '../Position';
 import Response from '../Response';
 import {useInput} from '../../../hooks/validation/useInput';
-import Preloader from '../../../components/UI/Preloader';
+import Preloader from '../../UI/Preloader';
 import Button from '../../UI/Button';
 import {getApiResource, pushFormData} from '../../../utils/network';
 import {checkValidInputGroup} from '../../../services/validation/validation';
@@ -56,10 +56,6 @@ const Form = ({setReset}) => {
                                     fileSize: 5242880  // 1048576, value in bytes
                                 },
     );
-    console.log('file obj', file);
-    console.log('name obj', name);
-    console.log('phone obj', phone);
-    console.log('isFormValid', isFormValid);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

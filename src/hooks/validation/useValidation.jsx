@@ -2,6 +2,14 @@ import {useState, useEffect} from 'react';
 import {checkInputValid} from '../../services/validation/validation'; 
 import {checkImageDimensions} from '../../services/validation/checkImageDimensions';
 
+/**
+ * data validation in accordance with the passed validation request
+ * @param {object, string} value - validated value. value type depending on input type. 
+ *                                  For example <input type="file"> or <input type="text">
+ * @param {object} validations - validation request. An object whose keys are the names of the validation type, 
+                                the values are the values for validation
+    @returns {object} -  validation results. Object with error status and validity for a particular input field
+ */
 const useValidation = (value, validations) => {
     // errors for a specific input field
     const [inputErrors, setInputErrors] = useState(null);

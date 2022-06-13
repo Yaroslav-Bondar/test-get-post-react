@@ -1,7 +1,6 @@
 @import '../../styles/_mixins/alignment';
 @import '../../styles/_config/variables';
 
-
 .get {
     &__container {
         padding-top: 140px;
@@ -20,9 +19,6 @@
     }
     &__users {
         margin-top: 50px;
-    }
-    &__more {
-
     }
     &__error {
         padding: $spacing-large 0;

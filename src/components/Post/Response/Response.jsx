@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import ErrorMessage from '../../../components/ErrorMessage';
 import SuccessMessage from '../SuccessMessage';
-import styles from './Response.module.scss';
 
 const Response = ({response}) => {
     return (

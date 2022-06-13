@@ -1,6 +1,7 @@
 export const RFC2822_EMAIL_VALIDATION = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 export const PHONE_VALIDATION = /^[\+]{0,1}380([0-9]{9})$/;
 
+// a set of messages to correct user input
 const HELPER_MESSAGES = {
     name: {
         helper: 'Should be 2-60 characters',
@@ -15,7 +16,7 @@ const HELPER_MESSAGES = {
         label: 'Phone number',
     }
 }
-// a set of messages to correct user input
+// a set of messages to correct user input, with errors
 export const VALID_MESSAGES = {
     errors : {
         minLengthError: 'Too few characters entered',

@@ -39,6 +39,12 @@
     &__name {
         margin-bottom: 20px;
     }
+    &__name,
+    &__position,
+    &__email,
+    &__phone {
+        word-break: break-word;
+    }
     &__email,
     &__phone {
         display: block;

@@ -53,7 +53,7 @@ const Form = ({setReset}) => {
                                     isFileEmpty: false,
                                     imageDimensions: {height: 70, width: 70, check: 'min'}, // value in pixels
                                     fileType: ['image/jpg', 'image/jpeg'],
-                                    fileSize: 5242880  // 1048576, value in bytes
+                                    fileSize: 5242880 // value in bytes
                                 },
     );
 

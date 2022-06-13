@@ -1,10 +1,8 @@
-import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Form from '../../components/Post/Form';
 import styles from './Post.module.scss';
 
 const Post = ({setReset}) => {
-    console.log('typeof setReset',typeof setReset);
     return (
         <section className={styles.post}>
             <div id='post' className={styles.post__container + ` _container`}>

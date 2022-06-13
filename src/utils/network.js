@@ -10,7 +10,6 @@ export const getApiResource = async url => {
         if(!data.success) {
             throw Error(`proccess server errors: ${data.message}`)
         }
-        console.log(data);
         return data;
     } catch(error) {
         return error;

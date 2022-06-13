@@ -64,7 +64,7 @@ const Form = ({setReset}) => {
         // display preloader in position: absolute;
         setIsCover(true);
         // submitting form data for user registration
-        const data = await pushFormData(form, API_USERS_PATH, API_TOKEN_PATH);
+        const data = await pushFormData(e.target, API_USERS_PATH, API_TOKEN_PATH);
          // check for Error
          if(data instanceof Error) {
             // setError(data);
@@ -114,7 +114,7 @@ const Form = ({setReset}) => {
                     {response && <Response response={response}/>}
                 </Modal>
             </div>
-            <form id="form" className={styles.form} onSubmit={handleSubmit}>
+            <form id="form" className={styles.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.form__container}>
                     <div className={styles.form__inputs}>
                         <div className={styles.form__helper}>

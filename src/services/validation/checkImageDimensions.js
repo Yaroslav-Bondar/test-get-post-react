@@ -30,20 +30,16 @@ export async function checkImageDimensions(options, value) {
                 // less than check
                 if(checkParameter === 'min') {
                     if(currentHeight < requiredHeight || currentWidth < requiredWidth) {
-                        console.log('the width or height of the image is smaller than required');
                         resolve(true);
                     } else {
-                        console.log('the width and height of the image is correct');
                         resolve(false);
                     } 
                 }
                 // greater than check
                 if(checkParameter === 'max') {
                     if(currentHeight > requiredHeight || currentWidth > requiredWidth) {
-                        console.log('the width or height of the image is larger than required');
                         resolve(true);                                        
                     } else {
-                        console.log('the width and height of the image is correct');
                         resolve(false);
                     } 
                 }

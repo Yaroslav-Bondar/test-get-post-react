@@ -1,4 +1,5 @@
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import logo from '../../static/img/logo.svg';
 import styles from './Header.module.scss';
 
 const Header = () => {
@@ -7,7 +8,7 @@ const Header = () => {
             <div className={styles.header__container + ` _container`}>
                 <div className="{styles.header__logo + ` logo`}">
                     <div className="logo__img">
-                        <img src="img/logo/logo.svg" alt="logo" className="logo__img-item img img_contain"/>
+                        <img src={logo} alt="logo" className="logo__img-item img img_contain"/>
                     </div>
                 </div>
                 <nav className={styles.header__links}>

@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/test-get-post-react/static/css/main.1ea741a5.css",
+    "main.js": "/test-get-post-react/static/js/main.37a9217f.js",
+    "static/js/787.a564e3cc.chunk.js": "/test-get-post-react/static/js/787.a564e3cc.chunk.js",
+    "static/media/header-bg.svg": "/test-get-post-react/static/media/header-bg.5e13adcd1ba9f120f8a1.svg",
+    "static/media/Nunito-Regular.eot": "/test-get-post-react/static/media/Nunito-Regular.c6e59efda8cb72db3d61.eot",
+    "static/media/Nunito-Regular.ttf": "/test-get-post-react/static/media/Nunito-Regular.9b23cc15e5741e3122e6.ttf",
+    "static/media/Nunito-Medium.ttf": "/test-get-post-react/static/media/Nunito-Medium.27fc7902608830b089a0.ttf",
+    "static/media/Nunito-Regular.woff": "/test-get-post-react/static/media/Nunito-Regular.c8b53f778f642bfc367b.woff",
+    "static/media/Nunito-Regular.woff2": "/test-get-post-react/static/media/Nunito-Regular.17d6fb4cbd2d4a010f50.woff2",
+    "static/media/Nunito-Medium.eot": "/test-get-post-react/static/media/Nunito-Medium.2959f36fb095a1c2632f.eot",
+    "static/media/Nunito-Medium.woff": "/test-get-post-react/static/media/Nunito-Medium.b685197fbb7d1ccc3dfe.woff",
+    "static/media/success-image.svg": "/test-get-post-react/static/media/success-image.147ff01aeb0caaca03a3a94cfe9c0ce6.svg",
+    "static/media/Nunito-Medium.woff2": "/test-get-post-react/static/media/Nunito-Medium.518825e37d97d9a0d180.woff2",
+    "static/media/preloader.svg": "/test-get-post-react/static/media/preloader.0aaf07f39acaa32ce036564ce35dba88.svg",
+    "index.html": "/test-get-post-react/index.html",
+    "main.1ea741a5.css.map": "/test-get-post-react/static/css/main.1ea741a5.css.map",
+    "main.37a9217f.js.map": "/test-get-post-react/static/js/main.37a9217f.js.map",
+    "787.a564e3cc.chunk.js.map": "/test-get-post-react/static/js/787.a564e3cc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ea741a5.css",
+    "static/js/main.37a9217f.js"
+  ]
+}
